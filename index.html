@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>McIntosh MSA5500 - Reset White Label</title>
+    <title>McIntosh MSA5500 - Full Restoration</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         :root {
@@ -117,11 +117,32 @@
             transform: translateY(10px);
         }
 
+        /* --- BORDURE ARGENTÉE VERROUILLÉE --- */
         .knob-wrapper { 
             display: flex; 
             flex-direction: column; 
             align-items: center; 
-            width: 220px;
+            width: 160px;
+        }
+
+        .knob-outer {
+            width: 140px; 
+            height: 140px;
+            background: linear-gradient(135deg, #f0f0f0, #888, #f0f0f0);
+            border-radius: 50%; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            flex-shrink: 0;
+        }
+
+        .knob-inner {
+            width: 132px; 
+            height: 132px;
+            background: radial-gradient(circle, #333, #000);
+            border-radius: 50%;
+            flex-shrink: 0;
         }
 
         .label-green { 
@@ -130,18 +151,6 @@
             font-weight: bold; 
             margin-bottom: 15px; 
             text-transform: uppercase; 
-        }
-
-        .knob-outer {
-            width: 140px; height: 140px;
-            background: linear-gradient(135deg, #f0f0f0, #888, #f0f0f0);
-            border-radius: 50%; display: flex; justify-content: center; align-items: center;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-        }
-        .knob-inner {
-            width: 132px; height: 132px;
-            background: radial-gradient(circle, #333, #000);
-            border-radius: 50%;
         }
 
         .button-unit {
@@ -167,14 +176,9 @@
             font-weight: bold; 
             text-transform: uppercase; 
             text-align: center; 
-            white-space: nowrap; 
         }
 
-        .small-label i { 
-            font-size: 14px; 
-            color: var(--mc-green); 
-            font-weight: bold;
-        }
+        .small-label i { font-size: 14px; color: var(--mc-green); }
 
         .btn-base {
             width: 45px;
@@ -189,7 +193,6 @@
 
         .power-btn { background: linear-gradient(to bottom, #8a0000, #4a0000); }
         .power-btn.active { background: #ff0000; box-shadow: 0 0 15px red, 0 2px 0 #111; }
-
         .black-btn { background: linear-gradient(to bottom, #333, #111); }
 
         .power-led {
@@ -198,14 +201,14 @@
             margin-bottom: 6px;
         }
         
-        /* --- RESET EN BLANC --- */
         .bottom-label-reset { 
             position: absolute;
             top: 100%;
             padding-top: 4px;
             left: 50%;
             transform: translateX(-50%);
-            color: #ffffff; /* Couleur blanche pour RESET */
+            color: #ffffff;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -213,22 +216,59 @@
 
 <div class="chassis-wrapper">
     <div class="side-trim side-left"></div>
-    
     <div class="amplifier-panel">
         <div class="meter-container">
             <div class="meter">
                 <svg class="meter-svg" viewBox="0 0 550 300">
+                    <style>text { font-family: Arial; font-weight: bold; fill: black; }</style>
                     <text x="275" y="40" font-size="14" text-anchor="middle" opacity="0.6">8 OHMS</text>
                     <path d="M80 180 Q 275 90 470 180" fill="none" stroke="black" stroke-width="4" stroke-dasharray="45,10"/>
+                    <g font-size="14">
+                        <text x="85" y="160" transform="rotate(-25 85,160)">1m</text>
+                        <text x="150" y="135" transform="rotate(-15 150,135)">.01</text>
+                        <text x="225" y="125" transform="rotate(-5 225,125)">.1</text>
+                        <text x="305" y="125" transform="rotate(5 305,125)">1</text>
+                        <text x="380" y="135" transform="rotate(15 380,135)">10</text>
+                        <text x="445" y="160" transform="rotate(25 445,160)">100</text>
+                    </g>
+                    <g font-size="14">
+                        <text x="115" y="195" transform="rotate(-20 115,195)">2m</text>
+                        <text x="180" y="210" transform="rotate(-10 180,210)">.02</text>
+                        <text x="245" y="218" transform="rotate(-3 245,218)">.2</text>
+                        <text x="325" y="218" transform="rotate(3 325,218)">2</text>
+                        <text x="390" y="210" transform="rotate(10 390,210)">20</text>
+                        <text x="450" y="195" transform="rotate(20 450,195)">200</text>
+                    </g>
+                    <text x="275" y="250" font-size="14" text-anchor="middle" opacity="0.6">4 OHMS</text>
                     <text x="275" y="285" font-size="22" text-anchor="middle" letter-spacing="4">POWER OUTPUT</text>
                 </svg>
                 <div class="needle" id="needle-l"></div>
             </div>
+            
             <div class="brand-center"><img src="img/mc-logo.png" alt="McIntosh" class="brand-logo-img"></div>
+
             <div class="meter">
                 <svg class="meter-svg" viewBox="0 0 550 300">
+                    <style>text { font-family: Arial; font-weight: bold; fill: black; }</style>
                     <text x="275" y="40" font-size="14" text-anchor="middle" opacity="0.6">8 OHMS</text>
                     <path d="M80 180 Q 275 90 470 180" fill="none" stroke="black" stroke-width="4" stroke-dasharray="45,10"/>
+                    <g font-size="14">
+                        <text x="85" y="160" transform="rotate(-25 85,160)">1m</text>
+                        <text x="150" y="135" transform="rotate(-15 150,135)">.01</text>
+                        <text x="225" y="125" transform="rotate(-5 225,125)">.1</text>
+                        <text x="305" y="125" transform="rotate(5 305,125)">1</text>
+                        <text x="380" y="135" transform="rotate(15 380,135)">10</text>
+                        <text x="445" y="160" transform="rotate(25 445,160)">100</text>
+                    </g>
+                    <g font-size="14">
+                        <text x="115" y="195" transform="rotate(-20 115,195)">2m</text>
+                        <text x="180" y="210" transform="rotate(-10 180,210)">.02</text>
+                        <text x="245" y="218" transform="rotate(-3 245,218)">.2</text>
+                        <text x="325" y="218" transform="rotate(3 325,218)">2</text>
+                        <text x="390" y="210" transform="rotate(10 390,210)">20</text>
+                        <text x="450" y="195" transform="rotate(20 450,195)">200</text>
+                    </g>
+                    <text x="275" y="250" font-size="14" text-anchor="middle" opacity="0.6">4 OHMS</text>
                     <text x="275" y="285" font-size="22" text-anchor="middle" letter-spacing="4">POWER OUTPUT</text>
                 </svg>
                 <div class="needle" id="needle-r"></div>
@@ -249,39 +289,15 @@
             </div>
 
             <div class="controls-center-group">
+                <div class="button-unit"><div class="label-zone"><span class="small-label"><i class="fas fa-step-backward"></i></span></div><div class="btn-base black-btn"></div></div>
+                <div class="button-unit"><div class="label-zone"><span class="small-label"><i class="fas fa-step-forward"></i></span></div><div class="btn-base black-btn"></div></div>
+                <div class="button-unit"><div class="label-zone"><span class="small-label"><i class="fas fa-play"></i>&nbsp;&nbsp;<i class="fas fa-pause"></i></span></div><div class="btn-base black-btn"></div></div>
+                <div class="button-unit"><div class="label-zone"><span class="small-label"><i class="fas fa-stop"></i></span></div><div class="btn-base black-btn"></div></div>
+                <div class="button-unit"><div class="label-zone"><span class="small-label">MUTE</span></div><div class="btn-base black-btn"></div></div>
+                <div class="button-unit"><div class="label-zone"><span class="small-label">DISPLAY</span></div><div class="btn-base black-btn"></div></div>
+                <div class="button-unit"><div class="label-zone"><span class="small-label">OPTIONS</span></div><div class="btn-base black-btn"></div></div>
                 <div class="button-unit">
-                    <div class="label-zone"><span class="small-label"><i class="fas fa-step-backward"></i></span></div>
-                    <div class="btn-base black-btn"></div>
-                </div>
-                <div class="button-unit">
-                    <div class="label-zone"><span class="small-label"><i class="fas fa-step-forward"></i></span></div>
-                    <div class="btn-base black-btn"></div>
-                </div>
-                <div class="button-unit">
-                    <div class="label-zone"><span class="small-label"><i class="fas fa-play"></i>&nbsp;&nbsp;<i class="fas fa-pause"></i></span></div>
-                    <div class="btn-base black-btn"></div>
-                </div>
-                <div class="button-unit">
-                    <div class="label-zone"><span class="small-label"><i class="fas fa-stop"></i></span></div>
-                    <div class="btn-base black-btn"></div>
-                </div>
-                <div class="button-unit">
-                    <div class="label-zone"><span class="small-label">MUTE</span></div>
-                    <div class="btn-base black-btn"></div>
-                </div>
-                <div class="button-unit">
-                    <div class="label-zone"><span class="small-label">DISPLAY</span></div>
-                    <div class="btn-base black-btn"></div>
-                </div>
-                <div class="button-unit">
-                    <div class="label-zone"><span class="small-label">OPTIONS</span></div>
-                    <div class="btn-base black-btn"></div>
-                </div>
-                <div class="button-unit">
-                    <div class="label-zone">
-                        <div class="power-led"></div>
-                        <span class="small-label">STANDBY/ON</span>
-                    </div>
+                    <div class="label-zone"><div class="power-led"></div><span class="small-label">STANDBY/ON</span></div>
                     <div class="btn-base power-btn" id="pwr"></div>
                     <span class="small-label bottom-label-reset">RESET</span>
                 </div>
