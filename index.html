@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>McIntosh MSA5500 - Silver Trim 15px Locked</title>
+    <title>McIntosh MSA5500 - Single Scale</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         :root {
@@ -100,7 +100,7 @@
             opacity: 0.1;
         }
 
-        /* --- TES PARAMÈTRES MÉMORISÉS --- */
+        /* --- PARAMÈTRES MÉMORISÉS --- */
         .knob-section {
             display: flex;
             justify-content: space-between;
@@ -117,7 +117,6 @@
             transform: translateY(10px);
         }
 
-        /* --- BORDURE ARGENTÉE BLOQUÉE À 15PX --- */
         .knob-wrapper { 
             display: flex; 
             flex-direction: column; 
@@ -138,7 +137,7 @@
         }
 
         .knob-inner {
-            width: 110px; /* 140 - (15*2) = 110px pour une bordure de 15px */
+            width: 110px; /* Bordure 15px */
             height: 110px;
             background: radial-gradient(circle, #333, #000);
             border-radius: 50%;
@@ -222,24 +221,18 @@
                 <svg class="meter-svg" viewBox="0 0 550 300">
                     <style>text { font-family: Arial; font-weight: bold; fill: black; }</style>
                     <text x="275" y="40" font-size="14" text-anchor="middle" opacity="0.6">8 OHMS</text>
+                    
                     <path d="M80 180 Q 275 90 470 180" fill="none" stroke="black" stroke-width="4" stroke-dasharray="45,10"/>
-                    <g font-size="14">
-                        <text x="85" y="160" transform="rotate(-25 85,160)">1m</text>
-                        <text x="150" y="135" transform="rotate(-15 150,135)">.01</text>
-                        <text x="225" y="125" transform="rotate(-5 225,125)">.1</text>
-                        <text x="305" y="125" transform="rotate(5 305,125)">1</text>
-                        <text x="380" y="135" transform="rotate(15 380,135)">10</text>
-                        <text x="445" y="160" transform="rotate(25 445,160)">100</text>
+                    
+                    <g font-size="12">
+                        <text x="82" y="162" transform="rotate(-30 82,162)">1m</text>
+                        <text x="145" y="130" transform="rotate(-18 145,130)">.01</text>
+                        <text x="218" y="115" transform="rotate(-6 218,115)">.1</text>
+                        <text x="305" y="115" transform="rotate(6 305,115)">1</text>
+                        <text x="385" y="130" transform="rotate(18 385,130)">10</text>
+                        <text x="455" y="162" transform="rotate(30 455,162)">100</text>
                     </g>
-                    <g font-size="14">
-                        <text x="115" y="195" transform="rotate(-20 115,195)">2m</text>
-                        <text x="180" y="210" transform="rotate(-10 180,210)">.02</text>
-                        <text x="245" y="218" transform="rotate(-3 245,218)">.2</text>
-                        <text x="325" y="218" transform="rotate(3 325,218)">2</text>
-                        <text x="390" y="210" transform="rotate(10 390,210)">20</text>
-                        <text x="450" y="195" transform="rotate(20 450,195)">200</text>
-                    </g>
-                    <text x="275" y="250" font-size="14" text-anchor="middle" opacity="0.6">4 OHMS</text>
+                    
                     <text x="275" y="285" font-size="22" text-anchor="middle" letter-spacing="4">POWER OUTPUT</text>
                 </svg>
                 <div class="needle" id="needle-l"></div>
@@ -251,24 +244,18 @@
                 <svg class="meter-svg" viewBox="0 0 550 300">
                     <style>text { font-family: Arial; font-weight: bold; fill: black; }</style>
                     <text x="275" y="40" font-size="14" text-anchor="middle" opacity="0.6">8 OHMS</text>
+                    
                     <path d="M80 180 Q 275 90 470 180" fill="none" stroke="black" stroke-width="4" stroke-dasharray="45,10"/>
-                    <g font-size="14">
-                        <text x="85" y="160" transform="rotate(-25 85,160)">1m</text>
-                        <text x="150" y="135" transform="rotate(-15 150,135)">.01</text>
-                        <text x="225" y="125" transform="rotate(-5 225,125)">.1</text>
-                        <text x="305" y="125" transform="rotate(5 305,125)">1</text>
-                        <text x="380" y="135" transform="rotate(15 380,135)">10</text>
-                        <text x="445" y="160" transform="rotate(25 445,160)">100</text>
+                    
+                    <g font-size="12">
+                        <text x="82" y="162" transform="rotate(-30 82,162)">1m</text>
+                        <text x="145" y="130" transform="rotate(-18 145,130)">.01</text>
+                        <text x="218" y="115" transform="rotate(-6 218,115)">.1</text>
+                        <text x="305" y="115" transform="rotate(6 305,115)">1</text>
+                        <text x="385" y="130" transform="rotate(18 385,130)">10</text>
+                        <text x="455" y="162" transform="rotate(30 455,162)">100</text>
                     </g>
-                    <g font-size="14">
-                        <text x="115" y="195" transform="rotate(-20 115,195)">2m</text>
-                        <text x="180" y="210" transform="rotate(-10 180,210)">.02</text>
-                        <text x="245" y="218" transform="rotate(-3 245,218)">.2</text>
-                        <text x="325" y="218" transform="rotate(3 325,218)">2</text>
-                        <text x="390" y="210" transform="rotate(10 390,210)">20</text>
-                        <text x="450" y="195" transform="rotate(20 450,195)">200</text>
-                    </g>
-                    <text x="275" y="250" font-size="14" text-anchor="middle" opacity="0.6">4 OHMS</text>
+                    
                     <text x="275" y="285" font-size="22" text-anchor="middle" letter-spacing="4">POWER OUTPUT</text>
                 </svg>
                 <div class="needle" id="needle-r"></div>
