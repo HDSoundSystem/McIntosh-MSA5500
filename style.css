@@ -82,16 +82,36 @@ body {
 .brand-center { flex: 1; display: flex; justify-content: center; }
 .brand-logo-img { height: 85px; }
 
-.display-area { flex: 1; display: flex; justify-content: center; align-items: center; }
+/* MODIFICATION ICI : Position absolue pour ne pas pousser les boutons */
+.display-area { 
+    position: absolute;
+    top: 360px; /* Centre l'écran verticalement entre le haut et le bas */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    z-index: 5;
+}
 
 .matrix-display {
-    width: 700px; height: 130px;
-    background: #020202; border: 2px solid #1a1a1a;
-    display: flex; flex-direction: column; justify-content: center; align-items: center;
-    color: var(--mc-blue); font-family: 'Courier New', monospace;
-    text-shadow: 0 0 15px var(--mc-blue); letter-spacing: 4px;
+    width: 850px; 
+    height: 240px; /* HAUTEUR AUGMENTÉE SANS POUSSER LES BOUTONS */
+    background: #020202; 
+    border: 2px solid #1a1a1a;
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center;
+    color: var(--mc-blue); 
+    font-family: 'Courier New', monospace;
+    text-shadow: 0 0 15px var(--mc-blue); 
+    letter-spacing: 4px;
     opacity: 0.1;
 }
+
+.vfd-small { font-size: 18px; margin-bottom: 5px; }
+.vfd-large { font-size: 48px; font-weight: bold; }
 
 /* --- PARAMÈTRES MÉMORISÉS --- */
 .knob-section {
@@ -199,6 +219,6 @@ body {
     padding-top: 4px;
     left: 50%;
     transform: translateX(-50%);
-    color: #ffffff; /* RESET EN BLANC */
+    color: #ffffff; 
     font-weight: bold;
 }
