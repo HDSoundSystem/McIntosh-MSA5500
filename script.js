@@ -8,6 +8,7 @@ const trackCount = document.getElementById('track-count');
 const fileFormat = document.getElementById('file-format');
 const bitrateDisplay = document.getElementById('bitrate');
 const timeDisplay = document.getElementById('time-display');
+const volDisplay = document.getElementById('volume-display'); // Nouveau
 const inputBtn = document.getElementById('input-knob'); 
 const fileUpload = document.getElementById('audio-upload');
 const playPauseBtn = document.getElementById('play-pause');
@@ -30,11 +31,24 @@ let source = null;
 let isPoweredOn = false;
 let isMuted = false;
 let isShowingRemaining = false;
+let volTimeout = null; // Pour gérer l'affichage bref
 
 let currentAngleL = -55;
 let currentAngleR = -55;
 let targetAngleL = -55;
 let targetAngleR = -55;
+
+// Fonction pour afficher le volume brièvement
+function showVolumeBriefly() {
+    if (!isPoweredOn || !volDisplay) return;
+    volDisplay.textContent = `VOL: ${Math.round(currentVolume * 100)}%`;
+    volDisplay.style.opacity = "1";
+    
+    clearTimeout(volTimeout);
+    volTimeout = setTimeout(() => {
+        volDisplay.style.opacity = "0";
+    }, 2000); // Disparaît après 2 secondes
+}
 
 // Fonction pour mettre à jour l'icône de statut
 function updateStatusIcon(state) {
@@ -62,6 +76,7 @@ pwr.addEventListener('click', () => {
         vfdLarge.textContent = "SYSTEM OFF";
         vfdInfo.textContent = "";
         updateStatusIcon('off');
+        if(volDisplay) volDisplay.style.opacity = "0";
         if(timeDisplay) timeDisplay.textContent = "00:00";
     } else {
         vfdLarge.textContent = "SELECT INPUT";
@@ -187,28 +202,30 @@ audio.addEventListener('timeupdate', () => {
     }
 });
 
-// --- CONTROLE VOLUME (ROULETTE + CLIC GAUCHE/DROIT) ---
+// --- CONTROLE VOLUME ---
 let currentVolume = 0.7;
 audio.volume = currentVolume;
 
 function updateVolumeDisplay() {
     audio.volume = currentVolume;
     volumeKnob.style.transform = `rotate(${currentVolume * 270 - 135}deg)`;
+    showVolumeBriefly();
 }
 
-// Clic Gauche pour baisser, Clic Droit pour monter
+// Clic et Survol
 volumeKnob.addEventListener('click', (e) => {
     if (!isPoweredOn) return;
     const rect = volumeKnob.getBoundingClientRect();
-    const x = e.clientX - rect.left; // Position X du clic dans le bouton
-    
+    const x = e.clientX - rect.left;
     if (x < rect.width / 2) {
-        currentVolume = Math.max(0, currentVolume - 0.05); // Clic à gauche
+        currentVolume = Math.max(0, currentVolume - 0.05);
     } else {
-        currentVolume = Math.min(1, currentVolume + 0.05); // Clic à droite
+        currentVolume = Math.min(1, currentVolume + 0.05);
     }
     updateVolumeDisplay();
 });
+
+volumeKnob.addEventListener('mouseenter', showVolumeBriefly);
 
 volumeKnob.addEventListener('wheel', (e) => {
     if (!isPoweredOn) return;

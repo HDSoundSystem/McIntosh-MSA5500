@@ -346,3 +346,31 @@ body {
 @keyframes blinker {
     50% { opacity: 0.3; }
 }
+
+/* Style de l'affichage du volume sur le VFD */
+#volume-display {
+    color: var(--mc-led-green);
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.4);
+    
+    /* Positionnement en bas au centre */
+    position: absolute;
+    left: 50%;
+    bottom: 10px; /* Aligné en bas du panneau */
+    transform: translateX(-50%);
+    
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* Animation pour la pause (rappel si besoin) */
+.blink-soft {
+    animation: blinker 1.5s linear infinite;
+}
+@keyframes blinker {
+    50% { opacity: 0.3; }
+}
