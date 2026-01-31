@@ -430,3 +430,37 @@ if (displayBtn) {
         meterContainer.classList.toggle('stealth-mode');
     });
 }
+
+const playlistPopup = document.getElementById('playlist-popup');
+const playlistItemsContainer = document.getElementById('playlist-items');
+const trackCountTrigger = document.getElementById('track-count');
+
+// 1. Ouvrir la playlist au clic sur le compteur
+trackCountTrigger.style.cursor = "pointer";
+trackCountTrigger.addEventListener('click', (e) => {
+    if (!isPoweredOn || playlist.length === 0) return;
+    e.stopPropagation();
+    
+    // On vide et on régénère la liste
+    playlistItemsContainer.innerHTML = "";
+    playlist.forEach((file, index) => {
+        const item = document.createElement('div');
+        item.className = `playlist-item ${index === currentIndex ? 'active-track' : ''}`;
+        item.innerHTML = `<span>${index + 1}. ${file.name.toUpperCase()}</span>`;
+        
+        item.addEventListener('click', () => {
+            loadTrack(index);
+            playlistPopup.style.display = 'none';
+        });
+        playlistItemsContainer.appendChild(item);
+    });
+
+    playlistPopup.style.display = 'block';
+});
+
+// 2. Fermer la playlist si on clique ailleurs
+document.addEventListener('click', (e) => {
+    if (playlistPopup.style.display === 'block' && !playlistPopup.contains(e.target)) {
+        playlistPopup.style.display = 'none';
+    }
+});

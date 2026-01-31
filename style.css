@@ -504,3 +504,46 @@ body {
 .meter-container.stealth-mode .needle {
     display: none;
 }
+
+/* Style pour les items de la playlist */
+.playlist-item {
+    padding: 10px;
+    border-bottom: 1px solid #222;
+    cursor: pointer;
+    transition: background 0.2s;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+}
+
+.playlist-item:hover {
+    background: #1a1a1a;
+    color: var(--mc-green);
+}
+
+.playlist-item.active-track {
+    color: var(--mc-green);
+    font-weight: bold;
+}
+
+/* Scrollbar personnalisée pour rester dans le style */
+#playlist-popup::-webkit-scrollbar {
+    width: 5px;
+}
+#playlist-popup::-webkit-scrollbar-thumb {
+    background: var(--mc-blue);
+}
+
+#playlist-popup {
+    display: none; /* Caché par défaut */
+    position: fixed;
+    top: 50%;         /* Position verticale (50% = centre) */
+    left: 20%;        /* Position horizontale (plus petit = plus à gauche) */
+    transform: translate(-50%, -50%); /* Pour que le centre de la popup soit au point choisi */
+    z-index: 10000;   /* Pour passer devant tout le reste */
+    
+    /* Tes réglages de style McIntosh */
+    background-color: #000;
+    border: 2px solid #555;
+    padding: 20px;
+}
