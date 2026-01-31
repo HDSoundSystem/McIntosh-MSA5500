@@ -8,7 +8,7 @@ const trackCount = document.getElementById('track-count');
 const fileFormat = document.getElementById('file-format');
 const bitrateDisplay = document.getElementById('bitrate');
 const timeDisplay = document.getElementById('time-display');
-const volDisplay = document.getElementById('volume-display'); // Nouveau
+const volDisplay = document.getElementById('volume-display');
 const inputBtn = document.getElementById('input-knob'); 
 const fileUpload = document.getElementById('audio-upload');
 const playPauseBtn = document.getElementById('play-pause');
@@ -31,23 +31,30 @@ let source = null;
 let isPoweredOn = false;
 let isMuted = false;
 let isShowingRemaining = false;
-let volTimeout = null; // Pour gérer l'affichage bref
+let volTimeout = null;
 
 let currentAngleL = -55;
 let currentAngleR = -55;
 let targetAngleL = -55;
 let targetAngleR = -55;
 
-// Fonction pour afficher le volume brièvement
-function showVolumeBriefly() {
+// Fonction pour afficher le volume ou le MUTE
+function showVolumeBriefly(forceMuteDisplay = false) {
     if (!isPoweredOn || !volDisplay) return;
-    volDisplay.textContent = `VOL: ${Math.round(currentVolume * 100)}%`;
-    volDisplay.style.opacity = "1";
     
     clearTimeout(volTimeout);
-    volTimeout = setTimeout(() => {
-        volDisplay.style.opacity = "0";
-    }, 2000); // Disparaît après 2 secondes
+
+    if (isMuted) {
+        volDisplay.textContent = "MUTE";
+        volDisplay.style.opacity = "1";
+    } else {
+        volDisplay.textContent = `VOL: ${Math.round(currentVolume * 100)}%`;
+        volDisplay.style.opacity = "1";
+        
+        volTimeout = setTimeout(() => {
+            volDisplay.style.opacity = "0";
+        }, 2000);
+    }
 }
 
 // Fonction pour mettre à jour l'icône de statut
@@ -174,11 +181,14 @@ stopBtn.addEventListener('click', () => {
     updateStatusIcon('stop');
 });
 
+// --- MUTE (Modifié : plus de changement d'apparence du bouton) ---
 muteBtn.addEventListener('click', () => {
     if (!isPoweredOn) return;
     isMuted = !isMuted;
     audio.muted = isMuted;
-    muteBtn.style.opacity = isMuted ? '0.5' : '1';
+    
+    // Affichage immédiat du statut "MUTE" ou du volume sur le VFD
+    showVolumeBriefly(true); 
 });
 
 if (timeDisplay) {
@@ -212,7 +222,6 @@ function updateVolumeDisplay() {
     showVolumeBriefly();
 }
 
-// Clic et Survol
 volumeKnob.addEventListener('click', (e) => {
     if (!isPoweredOn) return;
     const rect = volumeKnob.getBoundingClientRect();

@@ -374,3 +374,9 @@ body {
 @keyframes blinker {
     50% { opacity: 0.3; }
 }
+
+/* Style spécifique pour l'état MUTE sur le VFD */
+.mute-active {
+    opacity: 1 !important;
+    color: var(--mc-green); /* Optionnel : tu peux le mettre en rouge ou garder var(--mc-led-green) */
+}
