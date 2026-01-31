@@ -71,6 +71,17 @@ let currentVolume = 0.05;
 audio.volume = currentVolume;
 volumeKnob.style.transform = `rotate(${currentVolume * 270 - 135}deg)`;
 
+// --- FONCTION D'ADAPTATION DE LA TAILLE DU TEXTE ---
+function fitText(element, maxFontSize) {
+    if (!element) return;
+    let fontSize = maxFontSize;
+    element.style.fontSize = fontSize + "px";
+    while (element.scrollWidth > element.offsetWidth && fontSize > 12) {
+        fontSize--;
+        element.style.fontSize = fontSize + "px";
+    }
+}
+
 // Fonction pour afficher le volume, EQ ou le MUTE
 function showStatusBriefly(text) {
     if (!isPoweredOn || !volDisplay) return;
@@ -267,12 +278,14 @@ function loadTrack(index) {
         window.jsmediatags.read(file, {
             onSuccess: (tag) => {
                 const t = tag.tags;
-                vfdLarge.textContent = (t.title || file.name).toUpperCase().substring(0, 25);
+                vfdLarge.textContent = (t.title || file.name).toUpperCase();
                 vfdInfo.textContent = `${t.artist || "UNKNOWN"} – ${t.album || "UNKNOWN"}`.toUpperCase();
+                setTimeout(() => fitText(vfdLarge, 30), 10);
             },
             onError: () => {
-                vfdLarge.textContent = file.name.toUpperCase().substring(0, 25);
+                vfdLarge.textContent = file.name.toUpperCase();
                 vfdInfo.textContent = "ARTIST – ALBUM";
+                setTimeout(() => fitText(vfdLarge, 30), 10);
             }
         });
     }
@@ -524,13 +537,9 @@ if (timeDisplay) {
         if (!isPoweredOn) return;
         e.stopPropagation();
         
-        // Alterne l'état de la variable
         isShowingRemaining = !isShowingRemaining;
-        
-        // Affiche un bref message sur le VFD pour confirmer le mode
         showStatusBriefly(isShowingRemaining ? "REMAINING TIME" : "ELAPSED TIME");
         
-        // Force la mise à jour immédiate de l'affichage
         const displaySeconds = (isShowingRemaining && !isNaN(audio.duration)) 
             ? audio.duration - audio.currentTime 
             : audio.currentTime;
@@ -540,3 +549,34 @@ if (timeDisplay) {
         timeDisplay.textContent = `${isShowingRemaining ? '-' : ''}${mins}:${secs}`;
     });
 }
+
+// --- INTÉGRATION CONTRÔLES MULTIMÉDIA NAVIGATEUR (CHROME) ---
+function updateMediaMetadata() {
+    if ('mediaSession' in navigator && playlist.length > 0) {
+        const file = playlist[currentIndex];
+        navigator.mediaSession.metadata = new MediaMetadata({
+            title: vfdLarge.textContent || file.name,
+            artist: vfdInfo.textContent.split('–')[0].trim() || "McIntosh",
+            album: "McIntosh Hi-Fi System",
+            artwork: [{ src: popupImg.src, sizes: '512x512', type: 'image/png' }]
+        });
+    }
+}
+
+if ('mediaSession' in navigator) {
+    navigator.mediaSession.setActionHandler('play', () => { if(isPoweredOn) audio.play(); updateStatusIcon('play'); });
+    navigator.mediaSession.setActionHandler('pause', () => { audio.pause(); updateStatusIcon('pause'); });
+    navigator.mediaSession.setActionHandler('previoustrack', () => { if(isPoweredOn && currentIndex > 0) loadTrack(currentIndex - 1); });
+    navigator.mediaSession.setActionHandler('nexttrack', () => { 
+        if(!isPoweredOn) return;
+        if (currentIndex < playlist.length - 1) loadTrack(currentIndex + 1);
+        else if (repeatMode === 2) loadTrack(0);
+    });
+}
+
+// On surcharge loadTrack pour mettre à jour les infos Chrome
+const originalLoadTrack = loadTrack;
+loadTrack = function(index) {
+    originalLoadTrack(index);
+    setTimeout(updateMediaMetadata, 500);
+};
