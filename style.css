@@ -272,6 +272,18 @@ body {
     flex-shrink: 0;
 }
 
+/* Effet de pression sur le bouton Input */
+#input-knob {
+    transition: transform 0.1s ease, box-shadow 0.1s ease, filter 0.1s ease;
+    cursor: pointer;
+}
+
+#input-knob:active {
+    transform: scale(0.95); /* Le bouton rétrécit légèrement */
+    filter: brightness(1.2); /* Il devient un peu plus brillant */
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 255, 102, 0.3); /* Ombre interne + lueur externe */
+}
+
 .label-green {
     color: var(--mc-green);
     font-size: 16px;
