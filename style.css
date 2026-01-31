@@ -327,3 +327,21 @@ body {
     display: inline-block;
     text-align: right;
 }
+
+#vfd-status-icon {
+    color: var(--mc-led-green);
+    font-size: 16px;
+    margin-top: 5px;
+    text-align: center;
+    height: 20px;
+    text-shadow: 0 0 8px rgba(0, 255, 0, 0.3);
+}
+
+/* Animation de respiration pour la pause */
+.blink-soft {
+    animation: blinker 1.5s linear infinite;
+}
+
+@keyframes blinker {
+    50% { opacity: 0.3; }
+}
