@@ -463,3 +463,31 @@ body {
     justify-content: space-between;
     align-items: center;
 }
+
+.options-menu {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 280px;
+    background: #1a1a1a;
+    border: 2px solid #ce9e48;
+    padding: 20px;
+    z-index: 100;
+    box-shadow: 0 0 20px rgba(0,0,0,0.8);
+}
+
+.options-row {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.gold-divider {
+    width: 100%;
+    height: 1px;
+    background: #ce9e48; /* Couleur Gold McIntosh */
+    margin: 15px 0;
+}

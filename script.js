@@ -349,3 +349,56 @@ function animate() {
     }
 }
 animate();
+
+
+// --- GESTION DU POPUP OPTIONS ---
+const optionsPopup = document.getElementById('options-popup');
+const optionsToggleBtn = document.getElementById('options-toggle-btn');
+
+if (optionsToggleBtn && optionsPopup) {
+    optionsToggleBtn.addEventListener('click', (e) => {
+        // Le bouton ne fonctionne que si l'appareil est allumé
+        if (!isPoweredOn) return;
+        
+        e.stopPropagation(); // Empêche la fermeture immédiate
+        const isVisible = optionsPopup.style.display === 'block';
+        optionsPopup.style.display = isVisible ? 'none' : 'block';
+    });
+}
+
+// Fermer la popup si on clique n'importe où ailleurs sur l'écran
+document.addEventListener('click', (e) => {
+    if (optionsPopup && optionsPopup.style.display === 'block') {
+        if (!optionsPopup.contains(e.target) && e.target !== optionsToggleBtn) {
+            optionsPopup.style.display = 'none';
+        }
+    }
+});
+
+
+// --- LOGIQUE D'OUVERTURE OPTIONS ---
+const pop = document.getElementById('options-popup');
+const btnOpt = document.getElementById('btn-options-trigger');
+
+if (btnOpt && pop) {
+    btnOpt.addEventListener('click', (e) => {
+        // On empêche le clic de se propager pour ne pas fermer la popup aussitôt
+        e.stopPropagation();
+        
+        // On bascule l'affichage
+        if (pop.style.display === 'block') {
+            pop.style.display = 'none';
+        } else {
+            pop.style.display = 'block';
+            // On s'assure qu'elle est bien au-dessus de tout
+            pop.style.zIndex = "9999"; 
+        }
+    });
+}
+
+// Fermer la popup si on clique à côté
+document.addEventListener('click', (e) => {
+    if (pop && !pop.contains(e.target)) {
+        pop.style.display = 'none';
+    }
+});
