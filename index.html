@@ -1,183 +1,216 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>McIntosh MSA5500</title>
-      <meta name="author" content="Yohann Zaoui">
-        <meta name="keywords"content="McIntosh, Hi-Res Audio, Audio Player, Mini, HiFi, Touchscreen, Music Player, Web App, flac, mp3, music">
+    <head>
+        <meta charset="UTF-8">
+        <title>McIntosh MSA5500</title>
+        <meta name="author" content="Yohann Zaoui">
+        <meta name="keywords"
+            content="McIntosh, Hi-Res Audio, Audio Player, Mini, HiFi, Touchscreen, Music Player, Web App, flac, mp3, music">
         <link rel="icon" type="image/x-icon" href="img/favicon.png">
         <link rel="apple-touch-icon" href="img/favicon.png">
         <link rel="icon" type="image/png" href="img/favicon.png">
         <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <input type="file" id="audio-upload" accept=".flac,.mp3,.mp4,.wav" style="display: none;" multiple>
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <input type="file" id="audio-upload" accept=".flac,.mp3,.mp4,.wav"
+            style="display: none;" multiple>
 
-    <div class="chassis-wrapper">
-        <div class="side-trim side-left"></div>
+        <div class="chassis-wrapper">
+            <div class="side-trim side-left"></div>
 
-        <div class="amplifier-panel">
-            <div class="meter-container">
-                <div class="meter">
-                    <svg class="meter-svg" viewBox="0 0 550 300">
-                        
-                        
-                       
-                    </svg>
-                    <div class="needle" id="needle-l"></div>
+            <div class="amplifier-panel">
+                <div class="meter-container">
+                    <div class="meter">
+                        <svg class="meter-svg" viewBox="0 0 550 300">
+
+                        </svg>
+                        <div class="needle" id="needle-l"></div>
+                    </div>
+
+                    <div class="brand-center">
+                        <img src="img/mc-logo.png" alt="McIntosh"
+                            class="brand-logo-img">
+                    </div>
+
+                    <div class="meter">
+                        <svg class="meter-svg" viewBox="0 0 550 300">
+
+                        </svg>
+                        <div class="needle" id="needle-r"></div>
+                    </div>
                 </div>
 
-                <div class="brand-center">
-                    <img src="img/mc-logo.png" alt="McIntosh" class="brand-logo-img">
+                <div class="display-area">
+                    <div class="matrix-display" id="vfd">
+                        <div class="vfd-tech-corner">
+                            <div class="tech-label">TRACK</div>
+                            <div class="tech-data">
+                                <span id="track-count">0/0</span>
+                                <span id="file-format">---</span>
+                                <span id="bitrate">---</span>
+                            </div>
+                        </div>
+                        <div id="volume-display">VOL: 70%</div>
+                        <div class="vfd-tech-corner"
+                            style="left: auto; right: 20px; align-items: flex-end;">
+                            <div class="tech-label">TIME</div>
+                            <div class="tech-data">
+                                <span id="time-display">00:00</span>
+                            </div>
+                        </div>
+
+                        <div class="vfd-large">SELECT INPUT</div>
+                        <div class="vfd-info"></div>
+                        <div id="vfd-status-icon"
+                            style="color: var(--mc-led-green); font-size: 18px; margin-top: 5px; text-align: center; height: 20px;"></div>
+                    </div>
                 </div>
 
-                <div class="meter">
-                    <svg class="meter-svg" viewBox="0 0 550 300">
-                        
-                        
-                    </svg>
-                    <div class="needle" id="needle-r"></div>
-                </div>
-            </div>
-
-            <div class="display-area">
-                <div class="matrix-display" id="vfd">
-                    <div class="vfd-tech-corner">
-                        <div class="tech-label">TRACK</div>
-                        <div class="tech-data">
-                            <span id="track-count">0/0</span>
-                            <span id="file-format">---</span>
-                            <span id="bitrate">---</span>
+                <div class="knob-section">
+                    <div class="knob-wrapper">
+                        <div class="label-green">Input</div>
+                        <div class="knob-outer" id="input-knob">
+                            <div class="knob-inner"></div>
                         </div>
                     </div>
-                    <div id="volume-display">VOL: 70%</div>
-                    <div class="vfd-tech-corner" style="left: auto; right: 20px; align-items: flex-end;">
-                        <div class="tech-label">TIME</div>
-                        <div class="tech-data">
-                            <span id="time-display">00:00</span>
+
+                    <div class="controls-center-group">
+                        <div class="button-unit">
+                            <div class="label-zone"><span class="small-label"><i
+                                        class="fas fa-step-backward"></i></span></div>
+                            <div class="btn-base black-btn" id="prev-btn"></div>
+                        </div>
+                        <div class="button-unit">
+                            <div class="label-zone"><span class="small-label"><i
+                                        class="fas fa-step-forward"></i></span></div>
+                            <div class="btn-base black-btn" id="next-btn"></div>
+                        </div>
+                        <div class="button-unit">
+                            <div class="label-zone"><span class="small-label"><i
+                                        class="fas fa-play"></i>&nbsp;&nbsp;<i
+                                        class="fas fa-pause"></i></span></div>
+                            <div class="btn-base black-btn"
+                                id="play-pause"></div>
+                        </div>
+                        <div class="button-unit">
+                            <div class="label-zone"><span class="small-label"><i
+                                        class="fas fa-stop"></i></span></div>
+                            <div class="btn-base black-btn" id="stop-btn"></div>
+                        </div>
+                        <div class="button-unit">
+                            <div class="label-zone"><span
+                                    class="small-label">MUTE</span></div>
+                            <div class="btn-base black-btn" id="mute-btn"></div>
+                        </div>
+                        <div class="button-unit">
+                            <div class="label-zone"><span
+                                    class="small-label">DISPLAY</span></div>
+                            <div class="btn-base black-btn"></div>
+                        </div>
+                        <div class="button-unit">
+                            <div class="label-zone"><span
+                                    class="small-label">OPTIONS</span></div>
+                            <div class="btn-base black-btn"
+                                id="btn-options-trigger"></div>
+                        </div>
+                        <div class="button-unit">
+                            <div class="label-zone">
+                                <div class="power-led"></div>
+                                <span class="small-label">STANDBY / ON</span>
+                            </div>
+                            <div class="btn-base power-btn" id="pwr"></div>
+                            <span
+                                class="small-label bottom-label-reset">RESET</span>
                         </div>
                     </div>
 
-                    <div class="vfd-large">SELECT INPUT</div>
-                    <div class="vfd-info"></div>
-                    <div id="vfd-status-icon" style="color: var(--mc-led-green); font-size: 18px; margin-top: 5px; text-align: center; height: 20px;"></div> 
-                </div>
-            </div>
-
-            <div class="knob-section">
-                <div class="knob-wrapper">
-                    <div class="label-green">Input</div>
-                    <div class="knob-outer" id="input-knob"> 
-                        <div class="knob-inner"></div>
+                    <div class="knob-wrapper">
+                        <span class="label-green">VOLUME</span>
+                        <div class="knob-outer" id="volume-knob"><div
+                                class="knob-inner"></div></div>
                     </div>
                 </div>
 
-                <div class="controls-center-group">
-                    <div class="button-unit">
-                        <div class="label-zone"><span class="small-label"><i class="fas fa-step-backward"></i></span></div>
-                        <div class="btn-base black-btn" id="prev-btn"></div>
-                    </div>
-                    <div class="button-unit">
-                        <div class="label-zone"><span class="small-label"><i class="fas fa-step-forward"></i></span></div>
-                        <div class="btn-base black-btn" id="next-btn"></div>
-                    </div>
-                    <div class="button-unit">
-                        <div class="label-zone"><span class="small-label"><i class="fas fa-play"></i>&nbsp;&nbsp;<i class="fas fa-pause"></i></span></div>
-                        <div class="btn-base black-btn" id="play-pause"></div>
-                    </div>
-                    <div class="button-unit">
-                        <div class="label-zone"><span class="small-label"><i class="fas fa-stop"></i></span></div>
-                        <div class="btn-base black-btn" id="stop-btn"></div>
-                    </div>
-                    <div class="button-unit">
-                        <div class="label-zone"><span class="small-label">MUTE</span></div>
-                        <div class="btn-base black-btn" id="mute-btn"></div>
-                    </div>
-                    <div class="button-unit">
-                        <div class="label-zone"><span class="small-label">DISPLAY</span></div>
-                        <div class="btn-base black-btn"></div>
-                    </div>
-                    <div class="button-unit">
-                        <div class="label-zone"><span class="small-label">OPTIONS</span></div>
-                        <div class="btn-base black-btn" id="btn-options-trigger"></div>
-                    </div>
-                    <div class="button-unit">
-                        <div class="label-zone">
-                            <div class="power-led"></div>
-                            <span class="small-label">STANDBY / ON</span>
+                <div id="options-popup" class="options-menu">
+                    <div class="options-row">
+                        <div class="button-unit">
+                            <div class="label-zone"><span
+                                    class="small-label">RANDOM</span></div>
+                            <div class="btn-base black-btn"
+                                id="random-btn"></div>
                         </div>
-                        <div class="btn-base power-btn" id="pwr"></div>
-                        <span class="small-label bottom-label-reset">RESET</span>
+                        <div class="button-unit">
+                            <div class="label-zone"><span
+                                    class="small-label">REPEAT</span></div>
+                            <div class="btn-base black-btn"
+                                id="repeat-btn"></div>
+                        </div>
+                    </div>
+
+                    <div class="gold-divider"></div>
+
+                    <div class="options-row">
+                        <div class="button-unit">
+                            <div class="label-zone"><span
+                                    class="small-label">BASS -</span></div>
+                            <div class="btn-base black-btn"
+                                id="bass-down"></div>
+                        </div>
+                        <div class="button-unit">
+                            <div class="label-zone"><span
+                                    class="small-label">BASS +</span></div>
+                            <div class="btn-base black-btn" id="bass-up"></div>
+                        </div>
+                    </div>
+
+                    <div class="options-row">
+                        <div class="button-unit">
+                            <div class="label-zone"><span
+                                    class="small-label">TONE RESET</span></div>
+                            <div class="btn-base power-btn"
+                                id="tone-reset"></div>
+                        </div>
+                    </div>
+
+                    <div class="options-row">
+                        <div class="button-unit">
+                            <div class="label-zone"><span
+                                    class="small-label">TREBLE -</span></div>
+                            <div class="btn-base black-btn"
+                                id="treble-down"></div>
+                        </div>
+                        <div class="button-unit">
+                            <div class="label-zone"><span
+                                    class="small-label">TREBLE +</span></div>
+                            <div class="btn-base black-btn"
+                                id="treble-up"></div>
+                        </div>
                     </div>
                 </div>
-
-                <div class="knob-wrapper">
-                    <span class="label-green">VOLUME</span>
-                    <div class="knob-outer" id="volume-knob"><div class="knob-inner"></div></div>
+                <div id="playlist-popup" class="options-menu"
+                    style="width: 400px; max-height: 500px; overflow-y: auto;">
+                    <div class="label-green"
+                        style="text-align: center; margin-bottom: 15px;">Current
+                        Playlist</div>
+                    <div id="playlist-items"
+                        style="color: var(--mc-blue); font-family: 'Roboto', sans-serif; font-size: 14px;">
+                    </div>
                 </div>
             </div>
-            
-            <div id="options-popup" class="options-menu">
-                <div class="options-row">
-                    <div class="button-unit">
-                        <div class="label-zone"><span class="small-label">RANDOM</span></div>
-                        <div class="btn-base black-btn" id="random-btn"></div>
-                    </div>
-                    <div class="button-unit">
-                        <div class="label-zone"><span class="small-label">REPEAT</span></div>
-                        <div class="btn-base black-btn" id="repeat-btn"></div>
-                    </div>
-                </div>
-                
-                <div class="gold-divider"></div>
 
-                <div class="options-row">
-                    <div class="button-unit">
-                        <div class="label-zone"><span class="small-label">BASS -</span></div>
-                        <div class="btn-base black-btn" id="bass-down"></div>
-                    </div>
-                    <div class="button-unit">
-                        <div class="label-zone"><span class="small-label">BASS +</span></div>
-                        <div class="btn-base black-btn" id="bass-up"></div>
-                    </div>
-                </div>
-                
-                <div class="options-row">
-                    <div class="button-unit">
-                        <div class="label-zone"><span class="small-label">TONE RESET</span></div>
-                        <div class="btn-base power-btn" id="tone-reset"></div>
-                    </div>
-                </div>
-                
-                <div class="options-row">
-                    <div class="button-unit">
-                        <div class="label-zone"><span class="small-label">TREBLE -</span></div>
-                        <div class="btn-base black-btn" id="treble-down"></div>
-                    </div>
-                    <div class="button-unit">
-                        <div class="label-zone"><span class="small-label">TREBLE +</span></div>
-                        <div class="btn-base black-btn" id="treble-up"></div>
-                    </div>
-                </div>
-            </div>
-            <div id="playlist-popup" class="options-menu" style="width: 400px; max-height: 500px; overflow-y: auto;">
-    <div class="label-green" style="text-align: center; margin-bottom: 15px;">Current Playlist</div>
-    <div id="playlist-items" style="color: var(--mc-blue); font-family: 'Roboto', sans-serif; font-size: 14px;">
+            <div class="side-trim side-right"></div>
         </div>
-</div>
-        </div>
 
-        <div class="side-trim side-right"></div>
-    </div>
+        <div id="album-overlay"></div>
+        <div id="album-popup"><img id="popup-img" src alt="Pochette"></div>
 
-    <div id="album-overlay"></div>
-    <div id="album-popup"><img id="popup-img" src="" alt="Pochette"></div>
+        <audio id="main-audio" crossorigin="anonymous"></audio>
 
-    <audio id="main-audio" crossorigin="anonymous"></audio>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsmediatags/3.9.5/jsmediatags.min.js"></script>
-    <script src="script.js"></script>
-</body>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/jsmediatags/3.9.5/jsmediatags.min.js"></script>
+        <script src="script.js"></script>
+    </body>
 </html>

@@ -9,7 +9,7 @@ const fileFormat = document.getElementById('file-format');
 const bitrateDisplay = document.getElementById('bitrate');
 const timeDisplay = document.getElementById('time-display');
 const volDisplay = document.getElementById('volume-display');
-const inputBtn = document.getElementById('input-knob'); 
+const inputBtn = document.getElementById('input-knob');
 const fileUpload = document.getElementById('audio-upload');
 const playPauseBtn = document.getElementById('play-pause');
 const prevBtn = document.getElementById('prev-btn');
@@ -62,7 +62,7 @@ let currentAngleR = -55;
 let targetAngleL = -55;
 let targetAngleR = -55;
 let isRandom = false;
-let repeatMode = 0; 
+let repeatMode = 0;
 
 let volHoldInterval = null;
 
@@ -121,11 +121,11 @@ function updateVFDStatusDisplay() {
         modeIndicator.style.cssText = "position: absolute; bottom: 8px; left: 15px; color: var(--mc-led-green, #00ff66); font-size: 11px; font-weight: bold; text-shadow: 0 0 5px rgba(0,255,102,0.5); display: flex; gap: 10px;";
         document.getElementById('vfd').appendChild(modeIndicator);
     }
-    
+
     let repeatText = "";
     if (repeatMode === 1) repeatText = "REPEAT 1";
     else if (repeatMode === 2) repeatText = "REPEAT ALL";
-    
+
     modeIndicator.innerHTML = `<span>${isRandom ? "RANDOM" : ""}</span><span>${repeatText}</span>`;
 }
 
@@ -134,8 +134,8 @@ pwr.addEventListener('click', () => {
     isPoweredOn = !isPoweredOn;
     if (!isPoweredOn) {
         audio.pause();
-        audio.src = ""; 
-        fileUpload.value = ""; 
+        audio.src = "";
+        fileUpload.value = "";
         playlist = [];
         currentIndex = 0;
         isMuted = false;
@@ -144,22 +144,22 @@ pwr.addEventListener('click', () => {
         repeatMode = 0;
         bassGain = 0;
         trebleGain = 0;
-        
+
         currentVolume = 0.05;
         audio.volume = currentVolume;
         volumeKnob.style.transform = `rotate(${currentVolume * 270 - 135}deg)`;
-        
+
         vfdLarge.textContent = "SYSTEM OFF";
         vfdInfo.textContent = "";
         statusIcon.innerHTML = "";
         trackCount.textContent = "0/0";
         fileFormat.textContent = "---";
         bitrateDisplay.textContent = "0 KBPS";
-        if(volDisplay) volDisplay.style.opacity = "0";
-        if(timeDisplay) timeDisplay.textContent = "00:00";
+        if (volDisplay) volDisplay.style.opacity = "0";
+        if (timeDisplay) timeDisplay.textContent = "00:00";
         const modeIndicator = document.getElementById('vfd-mode-indicator');
-        if(modeIndicator) modeIndicator.textContent = "";
-        
+        if (modeIndicator) modeIndicator.textContent = "";
+
         targetAngleL = -55;
         targetAngleR = -55;
     } else {
@@ -174,7 +174,7 @@ function initEngine() {
         audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         analyser = audioCtx.createAnalyser();
         analyser.fftSize = 1024;
-        
+
         // Création Filtre Basses
         bassFilter = audioCtx.createBiquadFilter();
         bassFilter.type = "lowshelf";
@@ -189,7 +189,7 @@ function initEngine() {
 
         dataArray = new Uint8Array(analyser.frequencyBinCount);
         source = audioCtx.createMediaElementSource(audio);
-        
+
         // Chaînage : Source -> Bass -> Treble -> Analyser -> Sortie
         source.connect(bassFilter);
         bassFilter.connect(trebleFilter);
@@ -337,14 +337,14 @@ fileUpload.addEventListener('change', (e) => {
 playPauseBtn.addEventListener('click', () => {
     if (!isPoweredOn || playlist.length === 0) return;
     initEngine();
-    if (audio.paused) { audio.play(); updateStatusIcon('play'); } 
+    if (audio.paused) { audio.play(); updateStatusIcon('play'); }
     else { audio.pause(); updateStatusIcon('pause'); }
 });
 
-nextBtn.addEventListener('mousedown', (e) => { if(e.button === 0) startSeeking('next'); });
+nextBtn.addEventListener('mousedown', (e) => { if (e.button === 0) startSeeking('next'); });
 nextBtn.addEventListener('mouseup', () => stopSeeking('next'));
 nextBtn.addEventListener('mouseleave', () => { isMouseDown = false; clearInterval(seekInterval); });
-prevBtn.addEventListener('mousedown', (e) => { if(e.button === 0) startSeeking('prev'); });
+prevBtn.addEventListener('mousedown', (e) => { if (e.button === 0) startSeeking('prev'); });
 prevBtn.addEventListener('mouseup', () => stopSeeking('prev'));
 prevBtn.addEventListener('mouseleave', () => { isMouseDown = false; clearInterval(seekInterval); });
 
@@ -354,7 +354,7 @@ stopBtn.addEventListener('click', () => {
 });
 muteBtn.addEventListener('click', () => {
     if (!isPoweredOn) return;
-    isMuted = !isMuted; audio.muted = isMuted; showVolumeBriefly(); 
+    isMuted = !isMuted; audio.muted = isMuted; showVolumeBriefly();
 });
 
 document.getElementById('random-btn')?.addEventListener('click', () => {
@@ -452,7 +452,7 @@ document.addEventListener('click', (e) => {
 
 // --- GESTION DU BOUTON DISPLAY ---
 const centralButtons = document.querySelectorAll('.controls-center-group .black-btn');
-const displayBtn = centralButtons[5]; 
+const displayBtn = centralButtons[5];
 
 if (displayBtn) {
     displayBtn.addEventListener('click', () => {
@@ -536,14 +536,14 @@ if (timeDisplay) {
     timeDisplay.addEventListener('click', (e) => {
         if (!isPoweredOn) return;
         e.stopPropagation();
-        
+
         isShowingRemaining = !isShowingRemaining;
         showStatusBriefly(isShowingRemaining ? "REMAINING TIME" : "ELAPSED TIME");
-        
-        const displaySeconds = (isShowingRemaining && !isNaN(audio.duration)) 
-            ? audio.duration - audio.currentTime 
+
+        const displaySeconds = (isShowingRemaining && !isNaN(audio.duration))
+            ? audio.duration - audio.currentTime
             : audio.currentTime;
-            
+
         const mins = Math.floor(displaySeconds / 60).toString().padStart(2, '0');
         const secs = Math.floor(displaySeconds % 60).toString().padStart(2, '0');
         timeDisplay.textContent = `${isShowingRemaining ? '-' : ''}${mins}:${secs}`;
@@ -564,11 +564,11 @@ function updateMediaMetadata() {
 }
 
 if ('mediaSession' in navigator) {
-    navigator.mediaSession.setActionHandler('play', () => { if(isPoweredOn) audio.play(); updateStatusIcon('play'); });
+    navigator.mediaSession.setActionHandler('play', () => { if (isPoweredOn) audio.play(); updateStatusIcon('play'); });
     navigator.mediaSession.setActionHandler('pause', () => { audio.pause(); updateStatusIcon('pause'); });
-    navigator.mediaSession.setActionHandler('previoustrack', () => { if(isPoweredOn && currentIndex > 0) loadTrack(currentIndex - 1); });
-    navigator.mediaSession.setActionHandler('nexttrack', () => { 
-        if(!isPoweredOn) return;
+    navigator.mediaSession.setActionHandler('previoustrack', () => { if (isPoweredOn && currentIndex > 0) loadTrack(currentIndex - 1); });
+    navigator.mediaSession.setActionHandler('nexttrack', () => {
+        if (!isPoweredOn) return;
         if (currentIndex < playlist.length - 1) loadTrack(currentIndex + 1);
         else if (repeatMode === 2) loadTrack(0);
     });
@@ -576,7 +576,7 @@ if ('mediaSession' in navigator) {
 
 // On surcharge loadTrack pour mettre à jour les infos Chrome
 const originalLoadTrack = loadTrack;
-loadTrack = function(index) {
+loadTrack = function (index) {
     originalLoadTrack(index);
     setTimeout(updateMediaMetadata, 500);
 };
