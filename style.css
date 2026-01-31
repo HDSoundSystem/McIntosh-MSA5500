@@ -417,3 +417,49 @@ body {
     z-index: 999;
 }
 .vfd-large { cursor: pointer; }
+
+
+/* Le conteneur du VU-mètre */
+.dial {
+    position: relative;
+    width: 100%;
+    height: 140px; /* Ajuste selon ta maquette */
+    background-image: url('TON_URL_IMAGE_ICI'); /* REMPLACE PAR TON LIEN */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    border: none; /* On enlève l'ancienne bordure courbe */
+    overflow: hidden;
+}
+
+/* L'aiguille personnalisée */
+.needle {
+    position: absolute;
+    bottom: -2px; /* Position du pivot en bas */
+    left: 50%;
+    width: 2px; /* Largeur de l'aiguille */
+    height: 250px; /* Longueur augmentée pour être moins "petite" */
+    background-color: #000000; /* Change la couleur ici (ex: #000 pour noir) */
+    transform-origin: bottom center;
+    z-index: 10;
+    transition: transform 0.1s ease-out;
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.3); /* Un peu de relief */
+}
+
+.meter {
+    position: relative;
+    width: 100%; /* S'assure que le conteneur prend toute la place */
+    height: 280px; /* Ajuste selon la hauteur de ton image */
+    
+    /* --- INSERTION DE L'IMAGE --- */
+    background-image: url(img/vu-meter-2.png); 
+    background-size: 80% auto; /* L'image s'adapte à la largeur */
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    
+    background-color: transparent; /* Pour éviter de cacher le fond bleu */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
