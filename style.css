@@ -679,7 +679,7 @@ body {
     position: absolute;
     bottom: 8px; /* Ajuste pour monter/descendre le mot dans le cercle */
     left: 50%;
-    transform: translateX(-2230%);
+    transform: translateX(-2235%);
     
     z-index: 20;
     pointer-events: none;
@@ -698,7 +698,7 @@ body {
     position: absolute;
     bottom: 8px; /* Ajuste pour monter/descendre le mot dans le cercle */
     left: 50%;
-    transform: translateX(1460%);
+    transform: translateX(1465%);
     
     z-index: 20;
     pointer-events: none;
