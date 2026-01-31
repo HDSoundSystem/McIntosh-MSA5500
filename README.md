@@ -229,6 +229,4 @@ For issues, questions, or suggestions:
 -----
 
 **Enjoy your premium web audio experience! 🎵**
-
-<img width="1817" height="805" alt="1" src="https://github.com/user-attachments/assets/07633aea-ba79-466c-8998-9bd12435c918" />
-
+<img width="1825" height="786" alt="1" src="https://github.com/user-attachments/assets/846f43e8-5d6f-4bd1-aca2-8670b52a6a5b" />
