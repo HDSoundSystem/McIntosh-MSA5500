@@ -118,12 +118,12 @@ function updateStatusIcon(state) {
     if (!isPoweredOn || !statusIcon) return;
     statusIcon.className = "";
     if (state === 'play') {
-        statusIcon.innerHTML = '<i class="fas fa-play"></i>';
+        statusIcon.innerHTML = '<i class="fas fa-play"></i>PLAY';
     } else if (state === 'pause') {
-        statusIcon.innerHTML = '<i class="fas fa-pause"></i>';
+        statusIcon.innerHTML = '<i class="fas fa-pause"></i>PAUSE';
         statusIcon.classList.add('blink-soft');
     } else if (state === 'stop') {
-        statusIcon.innerHTML = '<i class="fas fa-stop"></i>';
+        statusIcon.innerHTML = '<i class="fas fa-stop"></i>STOP';
     } else {
         statusIcon.innerHTML = "";
     }
@@ -170,7 +170,7 @@ pwr.addEventListener('click', () => {
         audio.muted = false;
         isRandom = false;
         repeatMode = 0;
-        abMode = 0; 
+        abMode = 0;
         bassGain = 0;
         trebleGain = 0;
         currentBalance = 0;
@@ -202,7 +202,7 @@ pwr.addEventListener('click', () => {
 function initEngine() {
     if (!audioCtx) {
         audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        
+
         analyserL = audioCtx.createAnalyser();
         analyserR = audioCtx.createAnalyser();
         analyserL.fftSize = 1024;
@@ -235,8 +235,8 @@ function initEngine() {
         bassFilter.connect(trebleFilter);
         trebleFilter.connect(splitter);
 
-        splitter.connect(analyserL, 0); 
-        splitter.connect(analyserR, 1); 
+        splitter.connect(analyserL, 0);
+        splitter.connect(analyserR, 1);
 
         trebleFilter.connect(audioCtx.destination);
     }
@@ -330,8 +330,8 @@ if (toneReset) {
         bassGain = 0; trebleGain = 0; currentBalance = 0;
         if (bassFilter) bassFilter.gain.value = 0;
         if (trebleFilter) trebleFilter.gain.value = 0;
-        if (balanceNode) balanceNode.pan.value = 0;
-        showStatusBriefly("TONE FLAT / BAL: CENTER");
+
+        showStatusBriefly("TONE FLAT");
     });
     toneReset.addEventListener('mouseenter', () => {
         if (isPoweredOn) showStatusBriefly("TONE RESET");
@@ -342,9 +342,9 @@ if (toneReset) {
 function loadTrack(index) {
     if (playlist.length === 0 || !isPoweredOn) return;
     currentIndex = index;
-    abMode = 0; 
+    abMode = 0;
     updateVFDStatusDisplay();
-    
+
     const file = playlist[currentIndex];
     trackCount.textContent = `${currentIndex + 1}/${playlist.length}`;
     fileFormat.textContent = file.name.split('.').pop().toUpperCase();
@@ -538,7 +538,7 @@ function animate() {
 animate();
 
 const optionsPopup = document.getElementById('options-popup');
-const btnOpt = document.getElementById('options-btn'); 
+const btnOpt = document.getElementById('options-btn');
 function toggleOptions(e) {
     if (!isPoweredOn) return;
     e.stopPropagation();
@@ -547,7 +547,7 @@ function toggleOptions(e) {
 }
 btnOpt?.addEventListener('click', toggleOptions);
 
-const displayBtn = document.getElementById('display-btn'); 
+const displayBtn = document.getElementById('display-btn');
 if (displayBtn) {
     displayBtn.addEventListener('click', () => {
         if (!isPoweredOn) return;
