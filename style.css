@@ -305,10 +305,29 @@ body {
     align-items: center;
     width: 80px;
     position: relative;
+
+}
+
+.button-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80px;
+    position: relative;
+    gap: -10px;
 }
 
 .label-zone {
     height: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.label-zone-option {
+    height: 20px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -528,10 +547,10 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 250px;
-    min-height: 250px;
+
     background: #000000;
     border: 2px solid var(--mc-gold);
-    padding: 15px;
+    padding: 5px;
     z-index: 100;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
     transform: translate(90%, calc(-50% + 100px));
@@ -539,6 +558,7 @@ body {
 
 .options-row {
     display: flex;
+    margin-top: 2px;
     justify-content: space-around;
     align-items: center;
     margin-bottom: 2px;
@@ -547,8 +567,8 @@ body {
 .gold-divider {
     width: 100%;
     height: 1px;
-    background: #ffd700;
-    margin: 15px 0;
+    background: var(--mc-gold);
+    margin-top: 10px;
 }
 
 /* --- AJOUT INDICATEUR VFD RANDOM/REPEAT --- */
