@@ -28,6 +28,10 @@ const trebleDown = document.getElementById('treble-down');
 const trebleUp = document.getElementById('treble-up');
 const toneReset = document.getElementById('tone-reset');
 
+// --- SELECTEURS BALANCE ---
+const balL = document.getElementById('balance-L');
+const balR = document.getElementById('balance-R');
+
 // --- SELECTEURS POPUP ---
 const albumOverlay = document.getElementById('album-overlay');
 const albumPopup = document.getElementById('album-popup');
@@ -50,11 +54,14 @@ let isMuted = false;
 let isShowingRemaining = false;
 let volTimeout = null;
 
-// EQ Nodes
+// Nodes Audio
 let bassFilter = null;
 let trebleFilter = null;
+let balanceNode = null;
+
 let bassGain = 0;   // en dB
 let trebleGain = 0; // en dB
+let currentBalance = 0; // -1 (L) à 1 (R)
 
 // Variables pour avance/retour rapide
 let seekInterval = null;
@@ -142,7 +149,6 @@ function updateVFDStatusDisplay() {
     else if (abMode === 2) abText = "A - B";
 
     if (modeIndicator) {
-        // L'ordre est maintenant : RANDOM | REPEAT | A-B
         modeIndicator.innerHTML = `
             <span>${isRandom ? "RANDOM" : ""}</span>
             <span>${repeatText}</span>
@@ -164,9 +170,10 @@ pwr.addEventListener('click', () => {
         audio.muted = false;
         isRandom = false;
         repeatMode = 0;
-        abMode = 0; // Reset A-B
+        abMode = 0; 
         bassGain = 0;
         trebleGain = 0;
+        currentBalance = 0;
 
         currentVolume = 0.05;
         audio.volume = currentVolume;
@@ -191,7 +198,7 @@ pwr.addEventListener('click', () => {
     }
 });
 
-// --- MOTEUR AUDIO AVEC EQ ET STEREO REELLE ---
+// --- MOTEUR AUDIO AVEC EQ, BALANCE ET STEREO REELLE ---
 function initEngine() {
     if (!audioCtx) {
         audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -206,6 +213,10 @@ function initEngine() {
 
         const splitter = audioCtx.createChannelSplitter(2);
 
+        // NODE BALANCE
+        balanceNode = audioCtx.createStereoPanner();
+        balanceNode.pan.value = currentBalance;
+
         bassFilter = audioCtx.createBiquadFilter();
         bassFilter.type = "lowshelf";
         bassFilter.frequency.value = 200;
@@ -218,7 +229,9 @@ function initEngine() {
 
         source = audioCtx.createMediaElementSource(audio);
 
-        source.connect(bassFilter);
+        // CHAINE : SOURCE -> BALANCE -> EQ -> SPLITTER (VISU) -> DESTINATION
+        source.connect(balanceNode);
+        balanceNode.connect(bassFilter);
         bassFilter.connect(trebleFilter);
         trebleFilter.connect(splitter);
 
@@ -228,6 +241,33 @@ function initEngine() {
         trebleFilter.connect(audioCtx.destination);
     }
     if (audioCtx.state === 'suspended') audioCtx.resume();
+}
+
+// --- LOGIQUE BALANCE ---
+function setBalance(val) {
+    if (!isPoweredOn) return;
+    currentBalance = Math.max(-1, Math.min(1, val));
+    if (balanceNode) balanceNode.pan.value = currentBalance;
+    
+    let balText = "BAL: CENTER";
+    if (currentBalance < -0.05) balText = `BAL: ${Math.round(Math.abs(currentBalance) * 100)}% L`;
+    else if (currentBalance > 0.05) balText = `BAL: ${Math.round(currentBalance * 100)}% R`;
+    showStatusBriefly(balText);
+}
+
+// Touches clavier
+window.addEventListener('keydown', (e) => {
+    if (!isPoweredOn) return;
+    if (e.key === "ArrowLeft") setBalance(currentBalance - 0.1);
+    if (e.key === "ArrowRight") setBalance(currentBalance + 0.1);
+});
+
+// Boutons Balance
+if (balL) {
+    balL.addEventListener('click', () => setBalance(currentBalance - 0.1));
+}
+if (balR) {
+    balR.addEventListener('click', () => setBalance(currentBalance + 0.1));
 }
 
 // --- LOGIQUE EQ ---
@@ -282,11 +322,11 @@ if (trebleDown) {
 if (toneReset) {
     toneReset.addEventListener('click', () => {
         if (!isPoweredOn) return;
-        bassGain = 0;
-        trebleGain = 0;
+        bassGain = 0; trebleGain = 0; currentBalance = 0;
         if (bassFilter) bassFilter.gain.value = 0;
         if (trebleFilter) trebleFilter.gain.value = 0;
-        showStatusBriefly("TONE FLAT");
+        if (balanceNode) balanceNode.pan.value = 0;
+        showStatusBriefly("TONE FLAT / BAL: CENTER");
     });
     toneReset.addEventListener('mouseenter', () => {
         if (isPoweredOn) showStatusBriefly("TONE RESET");
@@ -297,7 +337,7 @@ if (toneReset) {
 function loadTrack(index) {
     if (playlist.length === 0 || !isPoweredOn) return;
     currentIndex = index;
-    abMode = 0; // Reset A-B lors du changement de track
+    abMode = 0; 
     updateVFDStatusDisplay();
     
     const file = playlist[currentIndex];
@@ -400,7 +440,6 @@ document.getElementById('repeat-btn')?.addEventListener('click', () => {
     repeatMode = (repeatMode + 1) % 3; updateVFDStatusDisplay();
 });
 
-// LOGIQUE BOUTON A-B
 document.getElementById('ab-loop-btn')?.addEventListener('click', () => {
     if (!isPoweredOn || playlist.length === 0) return;
     abMode = (abMode + 1) % 3;
@@ -420,11 +459,9 @@ document.getElementById('ab-loop-btn')?.addEventListener('click', () => {
 
 audio.addEventListener('timeupdate', () => {
     if (isPoweredOn && timeDisplay && !isNaN(audio.currentTime)) {
-        // Boucle A-B
         if (abMode === 2 && audio.currentTime >= pointB) {
             audio.currentTime = pointA;
         }
-        
         let displaySeconds = (isShowingRemaining && !isNaN(audio.duration)) ? audio.duration - audio.currentTime : audio.currentTime;
         const mins = Math.floor(displaySeconds / 60).toString().padStart(2, '0');
         const secs = Math.floor(displaySeconds % 60).toString().padStart(2, '0');
