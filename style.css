@@ -326,6 +326,7 @@ body {
     margin-bottom: 12px;
 }
 
+/*espace pour les labels des boutons du menu option */
 .label-zone-option {
     height: 20px;
     display: flex;
