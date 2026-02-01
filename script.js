@@ -122,7 +122,7 @@ function updateStatusIcon(state) {
     }
 }
 
-// --- MISE À JOUR VFD (RANDOM/A-B/REPEAT) ---
+// --- MISE À JOUR VFD (RANDOM / REPEAT / A-B) ---
 function updateVFDStatusDisplay() {
     let modeIndicator = document.getElementById('vfd-mode-indicator');
     if (!modeIndicator) {
@@ -142,10 +142,11 @@ function updateVFDStatusDisplay() {
     else if (abMode === 2) abText = "A - B";
 
     if (modeIndicator) {
+        // L'ordre est maintenant : RANDOM | REPEAT | A-B
         modeIndicator.innerHTML = `
             <span>${isRandom ? "RANDOM" : ""}</span>
-            <span style="color: #00ff66;">${abText}</span>
             <span>${repeatText}</span>
+            <span style="color: #00ff66;">${abText}</span>
         `;
     }
 }
