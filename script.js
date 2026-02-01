@@ -141,12 +141,12 @@ function updateVFDStatusDisplay() {
     }
 
     let repeatText = "";
-    if (repeatMode === 1) repeatText = "REPEAT 1";
-    else if (repeatMode === 2) repeatText = "REPEAT ALL";
+    if (repeatMode === 1) repeatText = "REPEAT(1)";
+    else if (repeatMode === 2) repeatText = "REPEAT(ALL)";
 
     let abText = "";
-    if (abMode === 1) abText = "A -";
-    else if (abMode === 2) abText = "A - B";
+    if (abMode === 1) abText = "A-";
+    else if (abMode === 2) abText = "A-B";
 
     if (modeIndicator) {
         modeIndicator.innerHTML = `

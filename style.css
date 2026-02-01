@@ -578,7 +578,7 @@ body {
     bottom: 8px;
     left: 20px;
     color: var(--mc-led-green, #00ff66);
-    font-size: 15px;
+    font-size: 12px !important;
     font-weight: bold;
     text-shadow: 0 0 5px rgba(0, 255, 102, 0.5);
     font-family: 'bitcount single', sans-serif;
