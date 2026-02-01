@@ -205,6 +205,9 @@ if (bassUp) {
         if (bassFilter) bassFilter.gain.value = bassGain;
         showStatusBriefly(`BASS: ${bassGain > 0 ? '+' : ''}${bassGain}dB`);
     });
+    bassUp.addEventListener('mouseenter', () => {
+        if (isPoweredOn) showStatusBriefly(`BASS: ${bassGain > 0 ? '+' : ''}${bassGain}dB`);
+    });
 }
 
 if (bassDown) {
@@ -213,6 +216,9 @@ if (bassDown) {
         bassGain = Math.max(-12, bassGain - 2);
         if (bassFilter) bassFilter.gain.value = bassGain;
         showStatusBriefly(`BASS: ${bassGain > 0 ? '+' : ''}${bassGain}dB`);
+    });
+    bassDown.addEventListener('mouseenter', () => {
+        if (isPoweredOn) showStatusBriefly(`BASS: ${bassGain > 0 ? '+' : ''}${bassGain}dB`);
     });
 }
 
@@ -223,6 +229,9 @@ if (trebleUp) {
         if (trebleFilter) trebleFilter.gain.value = trebleGain;
         showStatusBriefly(`TREBLE: ${trebleGain > 0 ? '+' : ''}${trebleGain}dB`);
     });
+    trebleUp.addEventListener('mouseenter', () => {
+        if (isPoweredOn) showStatusBriefly(`TREBLE: ${trebleGain > 0 ? '+' : ''}${trebleGain}dB`);
+    });
 }
 
 if (trebleDown) {
@@ -231,6 +240,9 @@ if (trebleDown) {
         trebleGain = Math.max(-12, trebleGain - 2);
         if (trebleFilter) trebleFilter.gain.value = trebleGain;
         showStatusBriefly(`TREBLE: ${trebleGain > 0 ? '+' : ''}${trebleGain}dB`);
+    });
+    trebleDown.addEventListener('mouseenter', () => {
+        if (isPoweredOn) showStatusBriefly(`TREBLE: ${trebleGain > 0 ? '+' : ''}${trebleGain}dB`);
     });
 }
 
@@ -242,6 +254,9 @@ if (toneReset) {
         if (bassFilter) bassFilter.gain.value = 0;
         if (trebleFilter) trebleFilter.gain.value = 0;
         showStatusBriefly("TONE FLAT");
+    });
+    toneReset.addEventListener('mouseenter', () => {
+        if (isPoweredOn) showStatusBriefly("TONE RESET");
     });
 }
 
