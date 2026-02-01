@@ -244,15 +244,18 @@ function initEngine() {
 }
 
 // --- LOGIQUE BALANCE ---
-function setBalance(val) {
-    if (!isPoweredOn) return;
-    currentBalance = Math.max(-1, Math.min(1, val));
-    if (balanceNode) balanceNode.pan.value = currentBalance;
-    
+function showBalanceStatus() {
     let balText = "BAL: CENTER";
     if (currentBalance < -0.05) balText = `BAL: ${Math.round(Math.abs(currentBalance) * 100)}% L`;
     else if (currentBalance > 0.05) balText = `BAL: ${Math.round(currentBalance * 100)}% R`;
     showStatusBriefly(balText);
+}
+
+function setBalance(val) {
+    if (!isPoweredOn) return;
+    currentBalance = Math.max(-1, Math.min(1, val));
+    if (balanceNode) balanceNode.pan.value = currentBalance;
+    showBalanceStatus();
 }
 
 // Touches clavier
@@ -265,9 +268,11 @@ window.addEventListener('keydown', (e) => {
 // Boutons Balance
 if (balL) {
     balL.addEventListener('click', () => setBalance(currentBalance - 0.1));
+    balL.addEventListener('mouseenter', () => { if (isPoweredOn) showBalanceStatus(); });
 }
 if (balR) {
     balR.addEventListener('click', () => setBalance(currentBalance + 0.1));
+    balR.addEventListener('mouseenter', () => { if (isPoweredOn) showBalanceStatus(); });
 }
 
 // --- LOGIQUE EQ ---
