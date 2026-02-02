@@ -391,7 +391,7 @@ body {
     padding-top: 4px;
     left: 50%;
     transform: translateX(-50%);
-    color: #ffffff;
+    color: #c0c0c0;
     font-weight: bold;
 }
 
@@ -609,7 +609,7 @@ body {
 }
 
 .push-label-input {
-    color: var(--mc-gold);
+    color: #c0c0c0;
     font-family: 'Roboto', sans-serif;
     font-size: 10px;
     font-weight: 900;
@@ -625,7 +625,7 @@ body {
 }
 
 .push-label-volume {
-    color: var(--mc-gold);
+    color: #c0c0c0;
     font-family: 'Roboto', sans-serif;
     font-size: 10px;
     font-weight: 900;
@@ -768,4 +768,11 @@ body {
 #logo-alt.active {
     opacity: 1;
     visibility: visible;
+}
+
+/* Cette classe éteint le label quand le mode DISPLAY est actif */
+.label-off {
+    color: #c0c0c0 !important; /* Gris très sombre ou 'transparent' pour éteindre */
+    text-shadow: none !important;
+    transition: color 0.5s ease;
 }

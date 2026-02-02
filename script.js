@@ -353,6 +353,9 @@ document.getElementById('display-btn')?.addEventListener('click', () => {
     // --- AUTRES ÉLÉMENTS À ÉTEINDRE ---
     document.getElementById('vfd')?.classList.toggle('force-off');
     document.querySelectorAll('.meter').forEach(m => m.classList.toggle('force-off'));
+    document.querySelectorAll('.label-green').forEach(label => {
+        label.classList.toggle('label-off');
+    });
 });
 
 document.getElementById('random-btn')?.addEventListener('click', () => { if (isPoweredOn) { isRandom = !isRandom; updateVFDStatusDisplay(); } });
