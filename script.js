@@ -69,7 +69,7 @@ let targetAngleL = -55;
 let targetAngleR = -55;
 let isRandom = false;
 let repeatMode = 0;
-let abMode = 0; 
+let abMode = 0;
 let pointA = 0;
 let pointB = 0;
 let volHoldInterval = null;
@@ -180,8 +180,8 @@ function initEngine() {
 // --- BALANCE & EQ (RESTAURÉ) ---
 function showBalanceStatus() {
     let balText = "BAL: CENTER";
-    if (currentBalance < -0.05) balText = `BAL: ${Math.round(Math.abs(currentBalance)*100)}% L`;
-    else if (currentBalance > 0.05) balText = `BAL: ${Math.round(currentBalance*100)}% R`;
+    if (currentBalance < -0.05) balText = `BAL: ${Math.round(Math.abs(currentBalance) * 100)}% L`;
+    else if (currentBalance > 0.05) balText = `BAL: ${Math.round(currentBalance * 100)}% R`;
     showStatusBriefly(balText);
 }
 function setBalance(val) { if (isPoweredOn && !isMonoActive) { currentBalance = Math.max(-1, Math.min(1, val)); if (balanceNode) balanceNode.pan.value = currentBalance; showBalanceStatus(); } }
@@ -192,16 +192,16 @@ balL?.addEventListener('mouseenter', () => isPoweredOn && showBalanceStatus());
 balR?.addEventListener('mouseenter', () => isPoweredOn && showBalanceStatus());
 
 const eqBtns = [
-    {b: bassUp, f: () => bassGain = Math.min(12, bassGain + 2), t: 'BASS'},
-    {b: bassDown, f: () => bassGain = Math.max(-12, bassGain - 2), t: 'BASS'},
-    {b: trebleUp, f: () => trebleGain = Math.min(12, trebleGain + 2), t: 'TREBLE'},
-    {b: trebleDown, f: () => trebleGain = Math.max(-12, trebleGain - 2), t: 'TREBLE'}
+    { b: bassUp, f: () => bassGain = Math.min(12, bassGain + 2), t: 'BASS' },
+    { b: bassDown, f: () => bassGain = Math.max(-12, bassGain - 2), t: 'BASS' },
+    { b: trebleUp, f: () => trebleGain = Math.min(12, trebleGain + 2), t: 'TREBLE' },
+    { b: trebleDown, f: () => trebleGain = Math.max(-12, trebleGain - 2), t: 'TREBLE' }
 ];
 eqBtns.forEach(item => {
-    item.b?.addEventListener('click', () => { if(isPoweredOn){ item.f(); applyLoudnessEffect(); showStatusBriefly(`${item.t}: ${ (item.t==='BASS'?bassGain:trebleGain)>0?'+':'' }${item.t==='BASS'?bassGain:trebleGain}dB`); }});
-    item.b?.addEventListener('mouseenter', () => { if(isPoweredOn){ showStatusBriefly(`${item.t}: ${ (item.t==='BASS'?bassGain:trebleGain)>0?'+':'' }${item.t==='BASS'?bassGain:trebleGain}dB`); }});
+    item.b?.addEventListener('click', () => { if (isPoweredOn) { item.f(); applyLoudnessEffect(); showStatusBriefly(`${item.t}: ${(item.t === 'BASS' ? bassGain : trebleGain) > 0 ? '+' : ''}${item.t === 'BASS' ? bassGain : trebleGain}dB`); } });
+    item.b?.addEventListener('mouseenter', () => { if (isPoweredOn) { showStatusBriefly(`${item.t}: ${(item.t === 'BASS' ? bassGain : trebleGain) > 0 ? '+' : ''}${item.t === 'BASS' ? bassGain : trebleGain}dB`); } });
 });
-toneReset?.addEventListener('click', () => { if(isPoweredOn){ bassGain=0; trebleGain=0; currentBalance=0; if(balanceNode && !isMonoActive) balanceNode.pan.value=0; applyLoudnessEffect(); showStatusBriefly("TONE FLAT"); }});
+toneReset?.addEventListener('click', () => { if (isPoweredOn) { bassGain = 0; trebleGain = 0; currentBalance = 0; if (balanceNode && !isMonoActive) balanceNode.pan.value = 0; applyLoudnessEffect(); showStatusBriefly("TONE FLAT"); } });
 toneReset?.addEventListener('mouseenter', () => isPoweredOn && showStatusBriefly("TONE RESET"));
 
 // --- TRACK LOADING & COVERS (JSMediatags RESTAURÉ) ---
@@ -213,7 +213,7 @@ function loadTrack(index) {
     fileFormat.textContent = file.name.split('.').pop().toUpperCase();
     audio.src = URL.createObjectURL(file);
     audio.onloadedmetadata = () => bitrateDisplay.textContent = Math.round(((file.size * 8) / audio.duration) / 1000) + " KBPS";
-    
+
     if (window.jsmediatags) {
         window.jsmediatags.read(file, {
             onSuccess: (tag) => {
@@ -252,7 +252,7 @@ audio.addEventListener('timeupdate', () => {
     if (!isPoweredOn || isNaN(audio.currentTime)) return;
     if (abMode === 2 && audio.currentTime >= pointB) audio.currentTime = pointA;
     let s = isShowingRemaining ? audio.duration - audio.currentTime : audio.currentTime;
-    const m = Math.floor(s/60).toString().padStart(2,'0'), sec = Math.floor(s%60).toString().padStart(2,'0');
+    const m = Math.floor(s / 60).toString().padStart(2, '0'), sec = Math.floor(s % 60).toString().padStart(2, '0');
     timeDisplay.textContent = `${isShowingRemaining ? '-' : ''}${m}:${sec}`;
 });
 
@@ -288,7 +288,7 @@ function stopSeeking(dir) {
     if (isPoweredOn && playlist.length > 0 && !isSeeking) {
         if (dir === 'next') {
             if (isRandom && playlist.length > 1) {
-                let n; do { n = Math.floor(Math.random()*playlist.length); } while(n===currentIndex);
+                let n; do { n = Math.floor(Math.random() * playlist.length); } while (n === currentIndex);
                 loadTrack(n);
             } else if (currentIndex < playlist.length - 1) loadTrack(currentIndex + 1);
             else if (repeatMode === 2) loadTrack(0);
@@ -319,14 +319,14 @@ trackCount.addEventListener('click', (e) => {
 
 // --- AUTRES CONTROLES ---
 inputBtn.addEventListener('click', () => fileUpload.click());
-fileUpload.addEventListener('change', (e) => { if (e.target.files.length > 0) { if (!isPoweredOn) { isPoweredOn = true; } playlist = Array.from(e.target.files); loadTrack(0); }});
+fileUpload.addEventListener('change', (e) => { if (e.target.files.length > 0) { if (!isPoweredOn) { isPoweredOn = true; } playlist = Array.from(e.target.files); loadTrack(0); } });
 playPauseBtn.addEventListener('click', () => { if (!isPoweredOn || playlist.length === 0) return; initEngine(); audio.paused ? (audio.play(), updateStatusIcon('play')) : (audio.pause(), updateStatusIcon('pause')); });
-stopBtn.addEventListener('click', () => { if(isPoweredOn){ audio.pause(); audio.currentTime = 0; updateStatusIcon('stop'); }});
-muteBtn.addEventListener('click', () => { if(isPoweredOn){ isMuted = !isMuted; audio.muted = isMuted; showVolumeBriefly(); }});
-document.getElementById('loudness-btn')?.addEventListener('click', () => { if(isPoweredOn){ isLoudnessActive = !isLoudnessActive; document.getElementById('vfd-loudness-text')?.classList.toggle('loudness-visible', isLoudnessActive); applyLoudnessEffect(); }});
-document.getElementById('display-btn')?.addEventListener('click', () => { if(isPoweredOn){ document.getElementById('vfd').classList.toggle('vfd-off'); document.querySelector('.meter-container').classList.toggle('stealth-mode'); }});
-document.getElementById('random-btn')?.addEventListener('click', () => { if(isPoweredOn){ isRandom = !isRandom; updateVFDStatusDisplay(); }});
-document.getElementById('repeat-btn')?.addEventListener('click', () => { if(isPoweredOn){ repeatMode = (repeatMode + 1) % 3; updateVFDStatusDisplay(); }});
+stopBtn.addEventListener('click', () => { if (isPoweredOn) { audio.pause(); audio.currentTime = 0; updateStatusIcon('stop'); } });
+muteBtn.addEventListener('click', () => { if (isPoweredOn) { isMuted = !isMuted; audio.muted = isMuted; showVolumeBriefly(); } });
+document.getElementById('loudness-btn')?.addEventListener('click', () => { if (isPoweredOn) { isLoudnessActive = !isLoudnessActive; document.getElementById('vfd-loudness-text')?.classList.toggle('loudness-visible', isLoudnessActive); applyLoudnessEffect(); } });
+document.getElementById('display-btn')?.addEventListener('click', () => { if (isPoweredOn) { document.getElementById('vfd').classList.toggle('vfd-off'); document.querySelector('.meter-container').classList.toggle('stealth-mode'); } });
+document.getElementById('random-btn')?.addEventListener('click', () => { if (isPoweredOn) { isRandom = !isRandom; updateVFDStatusDisplay(); } });
+document.getElementById('repeat-btn')?.addEventListener('click', () => { if (isPoweredOn) { repeatMode = (repeatMode + 1) % 3; updateVFDStatusDisplay(); } });
 document.getElementById('ab-loop-btn')?.addEventListener('click', () => {
     if (!isPoweredOn || playlist.length === 0) return;
     abMode = (abMode + 1) % 3;
@@ -341,11 +341,11 @@ function animate() {
     requestAnimationFrame(animate);
     if (analyserL && analyserR && !audio.paused && isPoweredOn) {
         analyserL.getByteFrequencyData(dataArrayL); analyserR.getByteFrequencyData(dataArrayR);
-        let lvlL = dataArrayL.reduce((a,b)=>a+b)/dataArrayL.length, lvlR = dataArrayR.reduce((a,b)=>a+b)/dataArrayR.length;
-        targetAngleL = -55 + Math.pow(Math.min(255, lvlL*1.8)/255, 0.7)*95;
-        targetAngleR = -55 + Math.pow(Math.min(255, lvlR*1.8)/255, 0.7)*95;
-        currentAngleL += (targetAngleL - currentAngleL)*0.25; currentAngleR += (targetAngleR - currentAngleR)*0.25;
-    } else { currentAngleL += (-55-currentAngleL) * 0.1; currentAngleR += (-55-currentAngleR) * 0.1; }
+        let lvlL = dataArrayL.reduce((a, b) => a + b) / dataArrayL.length, lvlR = dataArrayR.reduce((a, b) => a + b) / dataArrayR.length;
+        targetAngleL = -55 + Math.pow(Math.min(255, lvlL * 1.8) / 255, 0.7) * 95;
+        targetAngleR = -55 + Math.pow(Math.min(255, lvlR * 1.8) / 255, 0.7) * 95;
+        currentAngleL += (targetAngleL - currentAngleL) * 0.25; currentAngleR += (targetAngleR - currentAngleR) * 0.25;
+    } else { currentAngleL += (-55 - currentAngleL) * 0.1; currentAngleR += (-55 - currentAngleR) * 0.1; }
     nl.style.transform = `rotate(${currentAngleL}deg)`; nr.style.transform = `rotate(${currentAngleR}deg)`;
 }
 animate();
@@ -360,19 +360,22 @@ volumeKnob.addEventListener('mousedown', (e) => {
     change(); volHoldInterval = setInterval(change, 50);
 });
 window.addEventListener('mouseup', () => clearInterval(volHoldInterval));
-volumeKnob.addEventListener('wheel', (e) => { if(isPoweredOn){ e.preventDefault(); currentVolume = e.deltaY < 0 ? Math.min(1, currentVolume + 0.05) : Math.max(0, currentVolume - 0.05); updateVolumeDisplay(); }});
+volumeKnob.addEventListener('wheel', (e) => { if (isPoweredOn) { e.preventDefault(); currentVolume = e.deltaY < 0 ? Math.min(1, currentVolume + 0.05) : Math.max(0, currentVolume - 0.05); updateVolumeDisplay(); } });
+
+// --- HOVER VOLUME ---
+volumeKnob.addEventListener('mouseenter', () => { if (isPoweredOn) showVolumeBriefly(); });
 
 // --- MEDIA SESSION ---
-function updateMediaMetadata() { if ('mediaSession' in navigator && playlist.length > 0) { navigator.mediaSession.metadata = new MediaMetadata({ title: vfdLarge.textContent, artist: vfdInfo.textContent.split('–')[0].trim() }); }}
+function updateMediaMetadata() { if ('mediaSession' in navigator && playlist.length > 0) { navigator.mediaSession.metadata = new MediaMetadata({ title: vfdLarge.textContent, artist: vfdInfo.textContent.split('–')[0].trim() }); } }
 
 audio.onended = () => {
     if (repeatMode === 1) loadTrack(currentIndex);
-    else if (isRandom && playlist.length > 1) { let n; do { n = Math.floor(Math.random()*playlist.length); } while(n===currentIndex); loadTrack(n); }
+    else if (isRandom && playlist.length > 1) { let n; do { n = Math.floor(Math.random() * playlist.length); } while (n === currentIndex); loadTrack(n); }
     else if (currentIndex < playlist.length - 1) loadTrack(currentIndex + 1);
     else if (repeatMode === 2) loadTrack(0);
     else updateStatusIcon('stop');
 };
 
 const optionsPopup = document.getElementById('options-popup');
-document.getElementById('options-btn')?.addEventListener('click', (e) => { if (isPoweredOn) { e.stopPropagation(); optionsPopup.style.display = optionsPopup.style.display === 'block' ? 'none' : 'block'; }});
+document.getElementById('options-btn')?.addEventListener('click', (e) => { if (isPoweredOn) { e.stopPropagation(); optionsPopup.style.display = optionsPopup.style.display === 'block' ? 'none' : 'block'; } });
 document.addEventListener('click', (e) => { if (!optionsPopup?.contains(e.target)) optionsPopup.style.display = 'none'; if (!document.getElementById('playlist-popup')?.contains(e.target)) document.getElementById('playlist-popup').style.display = 'none'; });

@@ -696,3 +696,10 @@ body {
     letter-spacing: 0.5px;
     text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
 }
+
+/* --- CURSEURS INTERACTIFS --- */
+#track-count, 
+#time-display, 
+.vfd-large {
+    cursor: pointer;
+}
