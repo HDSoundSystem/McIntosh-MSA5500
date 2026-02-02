@@ -31,6 +31,23 @@
                     <div class="brand-center">
                         <img src="img/mc-logo.png" alt="McIntosh"
                             class="brand-logo-img">
+
+                        <div class="status-indicators-row">
+                            <div class="indicator-group">
+    <div style="display: flex; align-items: center; gap: 8px;">
+        <div id="led-pg-l" class="led-small led-red"></div>
+        
+        <span class="indicator-label" style="margin: 0;">POWER GUARD</span>
+        
+        <div id="led-pg-r" class="led-small led-red"></div>
+    </div>
+</div>
+                            <div class="indicator-group">
+                                <div id="led-mono"
+                                    class="led-small led-green"></div>
+                                <span class="indicator-label">MONO</span>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="meter">
@@ -48,6 +65,9 @@
                                 <span id="track-count">0/0</span>
                                 <span id="file-format">---</span>
                                 <span id="bitrate">---</span>
+                                <span id="vfd-loudness-text"
+                                    class="loudness-indicator">(LOUDNESS
+                                    ON)</span>
                             </div>
                         </div>
                         <div id="volume-display">VOL: 70%</div>
@@ -144,6 +164,7 @@
                     </div>
 
                     <div class="options-row">
+
                         <div class="button-option">
                             <div class="label-zone-option"><span
                                     class="small-label">RANDOM</span></div>
@@ -161,6 +182,22 @@
                                     class="small-label">A - B</span></div>
                             <div class="btn-base black-btn"
                                 id="ab-loop-btn"></div>
+                        </div>
+                    </div>
+
+                    <div class="gold-divider"></div>
+
+                    <div class="options-row">
+                        <div class="button-option">
+                            <div class="label-zone-option"><span
+                                    class="small-label">LOUDNESS</span></div>
+                            <div class="btn-base black-btn"
+                                id="loudness-btn"></div>
+                        </div>
+                        <div class="button-option">
+                            <div class="label-zone-option"><span
+                                    class="small-label">MONO</span></div>
+                            <div class="btn-base black-btn" id="mono-btn"></div>
                         </div>
                     </div>
 
@@ -241,16 +278,6 @@
         <div id="album-popup"><img id="popup-img" src alt="Pochette"></div>
 
         <audio id="main-audio" crossorigin="anonymous"></audio>
-
-        <script>
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/sw.js')
-                .then(reg => console.log('✅ Service Worker OK'))
-                .catch(err => console.log('❌ Erreur:', err));
-        });
-    }
-</script>
 
         <script
             src="https://cdnjs.cloudflare.com/ajax/libs/jsmediatags/3.9.5/jsmediatags.min.js"></script>
