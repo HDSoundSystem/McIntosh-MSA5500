@@ -1,18 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Bitcount+Single:wght@300&family=Roboto:wght@300;400&display=swap');
 
 :root {
+    --background-color-app: #3f3f3f;
     --mc-blue: #00c3ff;
     --mc-green: #00ff41;
     --mc-vumeter: #00aef2;
     --panel-black: #080808;
     --mc-led-green: #00ff00;
+    --mc-led-red: #ff0000;
     --mc-gold: #ffd700;
     --police-size-counter: 30px;
     --police-size-label-counter: 12px;
 }
 
 body {
-    background-color: #3f3f3f;
+    background-color: var(--background-color-app);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -373,8 +375,8 @@ body {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background-color: #ff0000;
-    box-shadow: 0 0 8px #ff0000;
+    background-color: var(--mc-led-red);
+    box-shadow: 0 0 8px var(--mc-led-red);
     margin-bottom: 5px;
     transition: none;
 }
@@ -421,7 +423,9 @@ body {
 }
 
 @keyframes blinker {
-    50% { opacity: 0.3; }
+    50% {
+        opacity: 0.3;
+    }
 }
 
 #volume-display {
@@ -570,8 +574,13 @@ body {
     font-weight: bold;
 }
 
-#playlist-popup::-webkit-scrollbar { width: 5px; }
-#playlist-popup::-webkit-scrollbar-thumb { background: var(--mc-blue); }
+#playlist-popup::-webkit-scrollbar {
+    width: 5px;
+}
+
+#playlist-popup::-webkit-scrollbar-thumb {
+    background: var(--mc-blue);
+}
 
 #playlist-popup {
     display: none;
@@ -680,7 +689,7 @@ body {
 
 .led-red.active {
     background-color: var();
-    box-shadow: 0 0 10px #ff0000, inset 0 0 2px #fff;
+    box-shadow: 0 0 10px var(--mc-led-red), inset 0 0 2px #fff;
 }
 
 .led-green.active {
@@ -694,12 +703,32 @@ body {
     font-weight: 700;
     color: #c0c0c0;
     letter-spacing: 0.5px;
-    text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
 }
 
 /* --- CURSEURS INTERACTIFS --- */
-#track-count, 
-#time-display, 
+#track-count,
+#time-display,
 .vfd-large {
     cursor: pointer;
+}
+
+.blink-fast {
+    animation: blink-red 0.2s infinite;
+    background-color: var(--mc-led-red) !important;
+    box-shadow: 0 0 10px var(--mc-led-red) !important;
+}
+
+@keyframes blink-red {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.3;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }

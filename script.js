@@ -351,7 +351,24 @@ function animate() {
 animate();
 
 // --- VOLUME ---
-function updateVolumeDisplay() { audio.volume = currentVolume; volumeKnob.style.transform = `rotate(${currentVolume * 270 - 135}deg)`; applyLoudnessEffect(); showVolumeBriefly(); }
+function updateVolumeDisplay() {
+    audio.volume = currentVolume;
+    volumeKnob.style.transform = `rotate(${currentVolume * 270 - 135}deg)`;
+    applyLoudnessEffect();
+    showVolumeBriefly();
+
+    // --- LOGIQUE POWER GUARD ---
+    const pgL = document.getElementById('led-pg-l');
+    const pgR = document.getElementById('led-pg-r');
+
+    if (isPoweredOn && currentVolume >= 0.90) {
+        pgL?.classList.add('blink-fast');
+        pgR?.classList.add('blink-fast');
+    } else {
+        pgL?.classList.remove('blink-fast');
+        pgR?.classList.remove('blink-fast');
+    }
+}
 volumeKnob.addEventListener('mousedown', (e) => {
     if (!isPoweredOn) return;
     const rect = volumeKnob.getBoundingClientRect();
