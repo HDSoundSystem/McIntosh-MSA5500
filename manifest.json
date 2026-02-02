@@ -1,23 +1,21 @@
 {
-  "short_name": "McIntosh-MSA5500",
-  "name": "McIntosh-MSA5500 Audio Player",
-  "description": "McIntosh-MSA5500 Audio Player",
+  "name": "McIntosh MSA5500",
+  "short_name": "MSA5500",
+  "description": "McIntosh MSA5500 Premium Audio Player",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#080808",
+  "theme_color": "#00c3ff",
   "icons": [
     {
-      "src": "img/favicon.png",
+      "src": "/img/favicon.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "img/favicon.png",
+      "src": "/img/favicon.png",
       "sizes": "512x512",
       "type": "image/png"
     }
-  ],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#1a1a1b",
-  "background_color": "#050505",
-  "orientation": "landscape",
-  "scope": "/"
+  ]
 }
