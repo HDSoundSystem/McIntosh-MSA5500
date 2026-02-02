@@ -573,6 +573,8 @@ This project pays homage to **McIntosh Laboratory**, legendary American manufact
 
 -----
 
+<img width="1815" height="829" alt="1" src="https://github.com/user-attachments/assets/ce51e6a5-9963-4129-9b07-9376b480a72b" />
+
 **Enjoy your premium web audio experience! 🎵🎛️**
 
 *Made with ❤️ for audio enthusiasts everywhere*
