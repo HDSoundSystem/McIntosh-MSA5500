@@ -9,7 +9,7 @@ A premium web-based audio player inspired by the legendary McIntosh amplifier de
 
 ![McIntosh_Logo](https://github.com/user-attachments/assets/9f65f1d2-5f77-458b-b0fc-5ec35e992042)
 
-<img width="1804" height="800" alt="1" src="https://github.com/user-attachments/assets/7d89f3f5-afa4-405d-9fb0-9ac03f2ea9ae" />
+<img width="1801" height="809" alt="1" src="https://github.com/user-attachments/assets/0a0ef47f-4ac1-4cf4-823f-25759c8a0c61" />
 
 ## ✨ Features
 
@@ -976,11 +976,11 @@ A: Ensure audio is playing and system is powered on. Check browser console for W
 A: Yes, once installed as a PWA. However, audio files must be loaded each session (not cached).
 
 -----
-<img width="1794" height="800" alt="12" src="https://github.com/user-attachments/assets/0b245795-5bc7-45fb-af52-c8a6e5b3765b" />
-<img width="1802" height="798" alt="11" src="https://github.com/user-attachments/assets/7f140594-02d7-49ae-b83c-c394bec91b4a" />
-<img width="1807" height="789" alt="10" src="https://github.com/user-attachments/assets/7b444954-1817-4280-84cb-1f458b0e65be" />
-<img width="1831" height="811" alt="2" src="https://github.com/user-attachments/assets/078ddd8e-ee1f-4f75-a1a0-07d21b3b03c6" />
-<img width="1802" height="805" alt="6" src="https://github.com/user-attachments/assets/afa663eb-8d07-4ee2-a16d-53ef301efd94" />
+<img width="1818" height="810" alt="2" src="https://github.com/user-attachments/assets/ea6b00ff-9808-4d62-89f1-13a700c7dc4c" />
+<img width="1802" height="805" alt="3" src="https://github.com/user-attachments/assets/33a7c62e-3d70-4e4e-8b07-a2b378f00ac9" />
+<img width="1816" height="808" alt="4" src="https://github.com/user-attachments/assets/c2b6061b-85aa-40ac-a80c-932bfd84d862" />
+<img width="1804" height="804" alt="5" src="https://github.com/user-attachments/assets/49109061-5c20-4d10-9bc3-b5bd0bb98dd3" />
+<img width="1810" height="804" alt="6" src="https://github.com/user-attachments/assets/68af4f6f-35d7-4b75-bae0-3f0bc918c59c" />
 
 **Enjoy your premium web audio experience! 🎵🎛️**
 

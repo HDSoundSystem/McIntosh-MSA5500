@@ -292,7 +292,7 @@ function startSeeking(dir) {
 function stopSeeking(dir) {
     if (!isMouseDown) return;
     clearInterval(seekInterval);
-    
+
     if (isPoweredOn && playlist.length > 0 && !isSeeking) {
         if (dir === 'next') {
             // Logique NEXT (inchangée)
@@ -319,7 +319,7 @@ function stopSeeking(dir) {
             }
         }
     }
-    isSeeking = false; 
+    isSeeking = false;
     isMouseDown = false;
 }
 
