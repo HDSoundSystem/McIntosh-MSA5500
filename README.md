@@ -976,7 +976,9 @@ A: Ensure audio is playing and system is powered on. Check browser console for W
 A: Yes, once installed as a PWA. However, audio files must be loaded each session (not cached).
 
 -----
-
+<img width="1794" height="800" alt="12" src="https://github.com/user-attachments/assets/0b245795-5bc7-45fb-af52-c8a6e5b3765b" />
+<img width="1802" height="798" alt="11" src="https://github.com/user-attachments/assets/7f140594-02d7-49ae-b83c-c394bec91b4a" />
+<img width="1807" height="789" alt="10" src="https://github.com/user-attachments/assets/7b444954-1817-4280-84cb-1f458b0e65be" />
 <img width="1831" height="811" alt="2" src="https://github.com/user-attachments/assets/078ddd8e-ee1f-4f75-a1a0-07d21b3b03c6" />
 <img width="1802" height="805" alt="6" src="https://github.com/user-attachments/assets/afa663eb-8d07-4ee2-a16d-53ef301efd94" />
 
