@@ -10,6 +10,8 @@
     --mc-gold: #786b46;
     --chassis-shadow:rgba(58, 58, 58, 0.8);
     --border-bottom: #2e2e2e;
+    --background-matrix-display: #020202;
+    --background-option-menu: #000000;
     --police-size-counter: 30px;
     --police-size-label-counter: 12px;
 }
@@ -195,8 +197,8 @@ body {
 .matrix-display {
     width: 950px;
     height: 280px;
-    background: #020202;
-    border: 3px solid #1a1a1a;
+    background: var(--background-matrix-display);
+    border: 2px solid #1a1a1a;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -526,13 +528,13 @@ body {
     z-index: 1000;
     background: #222;
     padding: 10px;
-    border: 2px solid #555;
+    border: 2px solid var(--mc-gold);
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
 }
 
 #album-popup img {
-    max-width: 400px;
-    max-height: 400px;
+    max-width: 600px;
+    max-height: 600px;
     display: block;
 }
 
@@ -569,7 +571,7 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 300px;
-    background: #000000;
+    background: var(--background-option-menu);
     border: 2px solid var(--mc-gold);
     padding: 5px;
     z-index: 100;
@@ -624,7 +626,7 @@ body {
 
 .playlist-item {
     padding: 10px;
-    border-bottom: 1px solid #222;
+    border-bottom: 1px solid var(--mc-gold);
     cursor: pointer;
     transition: background 0.2s;
     text-transform: uppercase;
