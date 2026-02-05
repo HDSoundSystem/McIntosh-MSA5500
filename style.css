@@ -139,8 +139,6 @@ body {
     opacity: 0.5;
 }
 
-
-
 .amplifier-panel {
     width: 1650px;
     height: 750px;
@@ -572,7 +570,8 @@ body {
     z-index: 1000;
     background: #222;
     padding: 10px;
-    border: 2px solid var(--mc-gold);
+    border: 5px solid var(--mc-gold);
+    border-radius: 15px;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
 }
 
@@ -959,7 +958,6 @@ body {
     padding: 20px;
     border: 8px solid var(--mc-gold);
     border-radius: 15px;
-    /* Vert McIntosh */
     width: 70%;
     height: 70%;
     box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
@@ -976,7 +974,7 @@ body {
 }
 
 .scan-label {
-    background: #00ff00;
+    background: var(--mc-green);
     color: #000;
     padding: 10px 20px;
     cursor: pointer;
@@ -1017,10 +1015,11 @@ body {
     text-align: center;
     margin-top: 10px;
     width: 100%;
+}
 
-    .playlist-logo-container {
-        text-align: center;
-        margin-top: 30px;
-        margin-bottom: 20px;
-        width: 100%;
-    }
+.playlist-logo-container {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    width: 100%;
+}
