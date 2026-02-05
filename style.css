@@ -326,7 +326,7 @@ body {
 
 .vfd-info {
     font-family: 'bitcount single', sans-serif;
-    font-size: 14px;
+    font-size: 18px;
     font-weight: 300;
     color: var(--mc-blue);
     text-align: center;
@@ -616,7 +616,8 @@ body {
     transform: translate(-50%, -50%);
     width: 300px;
     background: var(--background-option-menu);
-    border: 2px solid var(--mc-gold);
+    border: 8px solid var(--mc-gold);
+    border-radius: 15px;
     padding: 5px;
     z-index: 100;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
@@ -704,12 +705,17 @@ body {
     transform: translate(-50%, -50%);
     z-index: 10000;
     background-color: #000;
-    border: 2px solid #555;
+    border: 8px solid #555;
+    border-radius: 15px;
     padding: 20px;
+    width: 400px;
+    max-height: 700px; 
+    overflow-y: auto;
 }
 
 .options-logo-container {
     text-align: center;
+    margin-top: 100px;
     padding: 10px 0;
     width: 100%;
 }
@@ -951,7 +957,8 @@ body {
     background: #0a0a0a;
     margin: 5% auto;
     padding: 20px;
-    border: 2px solid var(--mc-gold);
+    border: 8px solid var(--mc-gold);
+    border-radius: 15px;
     /* Vert McIntosh */
     width: 70%;
     height: 70%;
@@ -964,7 +971,6 @@ body {
 .modal-header {
     display: flex;
     justify-content: space-between;
-
     padding-bottom: 10px;
     margin-bottom: 20px;
 }
@@ -1005,4 +1011,16 @@ body {
     color: #fff;
     cursor: pointer;
     font-size: 24px;
+}
+
+.logo-mc-cover {
+    text-align: center;
+    margin-top: 10px;
+    width: 100%;
+
+.playlist-logo-container {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    width: 100%;
 }
