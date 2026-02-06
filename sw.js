@@ -1,20 +1,20 @@
 // McIntosh MSA5500 - Service Worker
 // Version 1.0.0
 
-const CACHE_NAME = ‘mcintosh-msa5500 - v1.0.0’;
+const CACHE_NAME = ‘McIntosh - MSA5500’;
 const ASSETS_TO_CACHE = [
 ‘/’,
 ‘/index.html’,
 ‘/style.css’,
 ‘/script.js’,
 ‘/manifest.json’,
-‘/img/mc - logo.png’,
-‘/img/logo_b.png’,
-‘/img/favicon.png’,
-‘/img/vumeter - new.png’,
-‘/fontawesome7/css / all.min.css’,
-‘/fontawesome7/webfonts / fa - solid - 900.woff2’,
-‘/fontawesome7/webfonts / fa - solid - 900.ttf’
+‘/assets/img/mc - logo.png’,
+‘/assets/img/logo_b.png’,
+‘/assets/img/favicon.png’,
+‘/assets/img/vumeter - new.png’,
+‘/assets/fontawesome7/css / all.min.css’,
+‘/assets/fontawesome7/webfonts / fa - solid - 900.woff2’,
+‘/assets/fontawesome7/webfonts / fa - solid - 900.ttf’
 ];
 
 // Installation du Service Worker
