@@ -5,19 +5,19 @@ function createWindow() {
   const win = new BrowserWindow({
     width: 1200,
     height: 800,
+    // Cette ligne retire la barre de menu
+    autoHideMenuBar: true, 
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false
     }
   });
 
-  // On charge votre fichier HTML
   win.loadFile('index.html');
 }
 
 app.whenReady().then(createWindow);
 
-// Quitter quand toutes les fenêtres sont fermées (sauf sur Mac)
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();
 });
