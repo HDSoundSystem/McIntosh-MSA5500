@@ -1162,3 +1162,28 @@ body {
     /* Rend l'input invisible */
     border: none;
 }
+
+.streaming-label-container {
+    position: absolute;
+    width: 48%;
+    bottom: -18px;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    pointer-events: none;
+}
+
+.gold-line {
+    flex-grow: 1;
+    height: 1px;
+    background: var(--mc-gold);
+}
+
+.streaming-txt {
+    color: var(--mc-gold);
+    text-transform: uppercase;
+    font-weight: normal;
+    font-size: 10px;
+}
