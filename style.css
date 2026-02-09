@@ -1141,3 +1141,20 @@ body {
     background: #000; 
     pointer-events: none; /* Empêche de glisser l'image par erreur */
 }
+
+/* --- COLOR PICKERS DANS LES BOUTONS --- */
+.btn-base.black-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-base.black-btn input[type="color"] {
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    width: 120%;
+    height: 120%;
+    cursor: pointer;
+    opacity: 0; /* Rend l'input invisible */
+    border: none;
+}

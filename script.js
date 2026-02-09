@@ -499,3 +499,24 @@ function openInfo() {
         overlay.style.display = 'flex';
     }
 }
+
+// Changement de la couleur de fond de l'application
+const bgPicker = document.getElementById('bg-picker');
+bgPicker?.addEventListener('input', (e) => {
+    const color = e.target.value;
+    document.body.style.backgroundColor = color;
+    // On met à jour la couleur du bouton pour le feedback visuel
+    document.getElementById('background-color-btn').style.background = color;
+});
+
+// Changement de la couleur de l'ombre du châssis
+const shadowPicker = document.getElementById('shadow-picker');
+shadowPicker?.addEventListener('input', (e) => {
+    const color = e.target.value;
+    const chassis = document.querySelector('.amplifier-panel');
+    if (chassis) {
+        // Applique l'ombre selon tes réglages de base (0 60px 120px)
+        chassis.style.boxShadow = `0 60px 120px ${color}`;
+    }
+    document.getElementById('shadow-color-btn').style.background = color;
+});
