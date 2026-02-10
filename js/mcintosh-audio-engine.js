@@ -1,10 +1,8 @@
 /**
- * Moteur Audio McIntosh MSA5500
- * Gère la lecture, les filtres EQ et l'analyse spectrale pour les VU-mètres.
- * Compatible Web (Browser) et Electron (Node.js)
+ * Moteur Audio McIntosh MSA5500 - Mise à jour EQ 10 Bandes
+ * Gère la lecture, l'EQ graphique 10 bandes, le Loudness et les VU-mètres.
  */
 
-// Protection contre la double déclaration (pour éviter l'erreur SyntaxError)
 if (typeof window.McIntoshAudioEngine === 'undefined' && typeof McIntoshAudioEngine === 'undefined') {
 
     class McIntoshAudioEngine {
@@ -18,19 +16,17 @@ if (typeof window.McIntoshAudioEngine === 'undefined' && typeof McIntoshAudioEng
             this.balanceNode = null;
             this.source = null;
             
-            // États
+            // --- AJOUT EQ 10 BANDES ---
+            this.eqBands = [32, 64, 125, 250, 500, 1000, 2000, 4000, 8000, 16000];
+            this.filters = {}; // Stocke les BiquadFilterNodes par fréquence
+            
             this.bassGain = 0;
             this.trebleGain = 0;
             this.currentBalance = 0;
             this.isLoudnessActive = false;
-            
             this.isInitialized = false;
         }
 
-        /**
-         * Initialise le pipeline Web Audio
-         * Doit être appelé après un geste utilisateur (clic)
-         */
         init() {
             if (this.isInitialized) return;
 
@@ -41,41 +37,62 @@ if (typeof window.McIntoshAudioEngine === 'undefined' && typeof McIntoshAudioEng
                 this.analyserL.fftSize = 1024;
                 this.analyserR.fftSize = 1024;
 
-                const splitter = this.audioCtx.createChannelSplitter(2);
+                this.source = this.audioCtx.createMediaElementSource(this.audio);
                 this.balanceNode = this.audioCtx.createStereoPanner();
-                this.balanceNode.pan.value = this.currentBalance;
-
+                
+                // Filtres de tonalité classiques
                 this.bassFilter = this.audioCtx.createBiquadFilter();
                 this.bassFilter.type = "lowshelf";
                 this.bassFilter.frequency.value = 200;
-                this.bassFilter.gain.value = this.bassGain;
 
                 this.trebleFilter = this.audioCtx.createBiquadFilter();
                 this.trebleFilter.type = "highshelf";
                 this.trebleFilter.frequency.value = 3000;
-                this.trebleFilter.gain.value = this.trebleGain;
 
-                this.source = this.audioCtx.createMediaElementSource(this.audio);
-
-                // Connexions : Source -> Balance -> Bass -> Treble -> Splitter -> Analysers -> Out
-                this.source.connect(this.balanceNode);
+                // --- CRÉATION DE LA CHAÎNE EQ 10 BANDES ---
+                let lastNode = this.source;
+                
+                // Connexion Source -> Balance -> Bass -> Treble
+                lastNode.connect(this.balanceNode);
                 this.balanceNode.connect(this.bassFilter);
                 this.bassFilter.connect(this.trebleFilter);
-                this.trebleFilter.connect(splitter);
-                
+                lastNode = this.trebleFilter;
+
+                // Création et insertion des 10 filtres Peaking
+                this.eqBands.forEach(freq => {
+                    const filter = this.audioCtx.createBiquadFilter();
+                    filter.type = "peaking";
+                    filter.frequency.value = freq;
+                    filter.Q.value = 1.4; // Largeur de bande musicale
+                    filter.gain.value = 0;
+                    
+                    this.filters[freq] = filter;
+                    lastNode.connect(filter);
+                    lastNode = filter;
+                });
+
+                const splitter = this.audioCtx.createChannelSplitter(2);
+                lastNode.connect(splitter);
                 splitter.connect(this.analyserL, 0);
                 splitter.connect(this.analyserR, 1);
                 
-                this.trebleFilter.connect(this.audioCtx.destination);
+                lastNode.connect(this.audioCtx.destination);
 
                 this.isInitialized = true;
-                console.log("McIntosh Audio Engine Initialized");
+                console.log("McIntosh Audio Engine 10-Band EQ Initialized");
             } catch (e) {
                 console.error("Failed to initialize Audio Context:", e);
             }
         }
 
-        // --- COMMANDES DE LECTURE ---
+        // --- NOUVELLE MÉTHODE POUR L'EQ 10 BANDES ---
+        setCustomFilter(freq, gain) {
+            const filter = this.filters[freq];
+            if (filter && this.audioCtx) {
+                filter.gain.setTargetAtTime(gain, this.audioCtx.currentTime, 0.01);
+            }
+        }
+
         play() {
             if (this.audioCtx && this.audioCtx.state === 'suspended') {
                 this.audioCtx.resume();
@@ -83,19 +100,14 @@ if (typeof window.McIntoshAudioEngine === 'undefined' && typeof McIntoshAudioEng
             return this.audio.play();
         }
 
-        pause() {
-            this.audio.pause();
-        }
+        pause() { this.audio.pause(); }
 
         stop() {
             this.audio.pause();
             this.audio.currentTime = 0;
         }
 
-        // --- REGLAGES AUDIO ---
-        setVolume(val) {
-            this.audio.volume = Math.max(0, Math.min(1, val));
-        }
+        setVolume(val) { this.audio.volume = Math.max(0, Math.min(1, val)); }
 
         setBalance(val) {
             this.currentBalance = Math.max(-1, Math.min(1, val));
@@ -115,7 +127,6 @@ if (typeof window.McIntoshAudioEngine === 'undefined' && typeof McIntoshAudioEng
             let finalTreble = this.trebleGain;
 
             if (this.isLoudnessActive) {
-                // Effet Loudness compensé selon le volume (plus fort à bas volume)
                 const intensity = Math.max(0, (0.7 - this.audio.volume) / 0.7);
                 finalBass += (intensity * 8);
                 finalTreble += (intensity * 4);
@@ -125,29 +136,21 @@ if (typeof window.McIntoshAudioEngine === 'undefined' && typeof McIntoshAudioEng
             this.trebleFilter.gain.setTargetAtTime(finalTreble, this.audioCtx.currentTime, 0.01);
         }
 
-        // --- DATA POUR VU-METRES ---
         getLevels() {
             if (!this.isInitialized) return { left: 0, right: 0 };
-
             const dataL = new Uint8Array(this.analyserL.frequencyBinCount);
             const dataR = new Uint8Array(this.analyserR.frequencyBinCount);
-            
             this.analyserL.getByteFrequencyData(dataL);
             this.analyserR.getByteFrequencyData(dataR);
-
             const avgL = dataL.reduce((a, b) => a + b, 0) / dataL.length;
             const avgR = dataR.reduce((a, b) => a + b, 0) / dataR.length;
-
             return { left: avgL, right: avgR };
         }
     }
 
-    // --- EXPORT COMPATIBLE ---
     if (typeof module !== 'undefined' && module.exports) {
-        // Mode Electron / Node
         module.exports = McIntoshAudioEngine;
     } else {
-        // Mode Navigateur Web
         window.McIntoshAudioEngine = McIntoshAudioEngine;
     }
 }
