@@ -374,10 +374,14 @@
 
 	<div id="eq-popup" class="mc-popup-eq">
     <div class="eq-header">
-        <span>EQUALIZER</span>
+        <span>10 BANDS EQUALIZER (+- 12dB)</span>
         <div class="close-eq" id="close-eq">&times;</div>
     </div>
     
+    <div class="eq-graph-container">
+        <canvas id="eq-curve"></canvas>
+    </div>
+
     <div class="eq-sliders-container">
         <div class="eq-band"><input type="range" min="-12" max="12" value="0" step="1" data-freq="32"><span>32Hz</span></div>
         <div class="eq-band"><input type="range" min="-12" max="12" value="0" step="1" data-freq="64"><span>64Hz</span></div>

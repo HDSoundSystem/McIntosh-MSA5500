@@ -575,12 +575,62 @@ const eqPopup = document.getElementById('eq-popup');
 const closeEq = document.getElementById('close-eq');
 const eqResetBtn = document.getElementById('eq-reset-btn');
 const eqSliders = document.querySelectorAll('.eq-band input');
+const eqCanvas = document.getElementById('eq-curve');
+const eqCtx = eqCanvas?.getContext('2d');
+
+// Fonction pour dessiner la courbe lissée
+function drawEQCurve() {
+    if (!eqCanvas || !eqCtx) return;
+    
+    const width = eqCanvas.width = eqCanvas.offsetWidth;
+    const height = eqCanvas.height = eqCanvas.offsetHeight;
+    
+    eqCtx.clearRect(0, 0, width, height);
+    
+    // Dessin de la grille de fond
+    eqCtx.strokeStyle = "#1a1a1a";
+    eqCtx.lineWidth = 1;
+    eqCtx.beginPath();
+    for(let i = 1; i < 4; i++) {
+        let y = (height / 4) * i;
+        eqCtx.moveTo(0, y); eqCtx.lineTo(width, y);
+    }
+    eqCtx.stroke();
+
+    // Récupération des points (X = slider, Y = gain)
+    const points = Array.from(eqSliders).map((slider, index) => {
+        const x = (width / (eqSliders.length - 1)) * index;
+        const y = (height / 2) - (slider.value * (height / 26)); 
+        return {x, y};
+    });
+
+    // Dessin de la courbe "Glow" McIntosh
+    eqCtx.beginPath();
+    eqCtx.strokeStyle = "#00ff66";
+    eqCtx.lineWidth = 3;
+    eqCtx.lineCap = "round";
+    eqCtx.shadowBlur = 10;
+    eqCtx.shadowColor = "#00ff66";
+    
+    eqCtx.moveTo(points[0].x, points[0].y);
+
+    for (let i = 0; i < points.length - 1; i++) {
+        const xc = (points[i].x + points[i + 1].x) / 2;
+        const yc = (points[i].y + points[i + 1].y) / 2;
+        eqCtx.quadraticCurveTo(points[i].x, points[i].y, xc, yc);
+    }
+
+    eqCtx.lineTo(points[points.length - 1].x, points[points.length - 1].y);
+    eqCtx.stroke();
+    eqCtx.shadowBlur = 0;
+}
 
 // Ouvrir la pop-up
 eqBtn?.addEventListener('click', (e) => {
     if (isPoweredOn) {
         e.stopPropagation();
         eqPopup.style.display = 'block';
+        setTimeout(drawEQCurve, 50); // Petit délai pour s'assurer que le canvas est visible
     } else {
         showStatusBriefly("POWER ON FIRST");
     }
@@ -606,6 +656,9 @@ eqSliders.forEach(slider => {
             engine.setCustomFilter(freq, gain);
         }
         
+        // Mise à jour de la courbe en temps réel
+        drawEQCurve();
+        
         // Affiche la fréquence modifiée sur le VFD
         showStatusBriefly(`${freq}Hz: ${gain > 0 ? '+' : ''}${gain}dB`);
     });
@@ -623,5 +676,7 @@ eqResetBtn?.addEventListener('click', () => {
         }
     });
 
+    // Remet la courbe à plat
+    drawEQCurve();
     showStatusBriefly("EQ FLAT (0dB)");
 });

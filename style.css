@@ -1191,7 +1191,7 @@ body {
 .mc-popup-eq {
     display: none;
     position: absolute;
-    top: 50%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 500px;
@@ -1273,4 +1273,19 @@ margin-top: 10px;
 /* On s'assure que le bouton garde les styles globaux de ton application */
 .eq-footer .button-option {
     margin: 0;
+}
+
+.eq-graph-container {
+    width: 100%;
+    height: 100px;
+    background: #050505;
+    border: 1px solid #222;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    position: relative;
+}
+
+#eq-curve {
+    width: 100%;
+    height: 100%;
 }
