@@ -19,7 +19,7 @@
         <link rel="stylesheet" href="assets/fontawesome7/css/all.min.css">
     </head>
     <body>
-        <input type="file" id="audio-upload" accept=".flac,.mp3,.mp4,.wav"
+        <input type="file" id="audio-upload" accept=".flac,.mp3,.mp4,.wav,.m4a,.aac,.ogg"
             style="display: none;" multiple>
 
         <div class="chassis-wrapper">
@@ -209,6 +209,12 @@
                     </div>
                     <div class="gold-divider"></div>
                     <div class="options-row">
+			<div class="button-option">
+                            <div class="label-zone-option"><span
+                                    class="small-label">EQ</span></div>
+                            <div class="btn-base black-btn"
+                                id="eq-btn"></div>
+                        </div>
                         <div class="button-option">
                             <div class="label-zone-option"><span
                                     class="small-label">LOUDNESS</span></div>
@@ -365,6 +371,33 @@
                 </div>
             </div>
         </div>
+
+	<div id="eq-popup" class="mc-popup-eq">
+    <div class="eq-header">
+        <span>ENVIRONMENTAL EQUALIZER</span>
+        <div class="close-eq" id="close-eq">&times;</div>
+    </div>
+    
+    <div class="eq-sliders-container">
+        <div class="eq-band"><input type="range" min="-12" max="12" value="0" step="1" data-freq="32"><span>32Hz</span></div>
+        <div class="eq-band"><input type="range" min="-12" max="12" value="0" step="1" data-freq="64"><span>64Hz</span></div>
+        <div class="eq-band"><input type="range" min="-12" max="12" value="0" step="1" data-freq="125"><span>125Hz</span></div>
+        <div class="eq-band"><input type="range" min="-12" max="12" value="0" step="1" data-freq="250"><span>250Hz</span></div>
+        <div class="eq-band"><input type="range" min="-12" max="12" value="0" step="1" data-freq="500"><span>500Hz</span></div>
+        <div class="eq-band"><input type="range" min="-12" max="12" value="0" step="1" data-freq="1000"><span>1k</span></div>
+        <div class="eq-band"><input type="range" min="-12" max="12" value="0" step="1" data-freq="2000"><span>2k</span></div>
+        <div class="eq-band"><input type="range" min="-12" max="12" value="0" step="1" data-freq="4000"><span>4k</span></div>
+        <div class="eq-band"><input type="range" min="-12" max="12" value="0" step="1" data-freq="8000"><span>8k</span></div>
+        <div class="eq-band"><input type="range" min="-12" max="12" value="0" step="1" data-freq="16000"><span>16k</span></div>
+    </div>
+
+    <div class="eq-footer">
+        <div class="button-option">
+            <div class="label-zone-option"><span class="small-label">FLAT</span></div>
+            <div class="btn-base black-btn" id="eq-reset-btn"></div>
+        </div>
+    </div>
+</div>
 
         <div id="info-overlay-fix" onclick="this.style.display='none'">
             <img src="assets/info/info.png" alt="Information">
