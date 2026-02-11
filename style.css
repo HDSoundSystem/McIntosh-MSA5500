@@ -180,6 +180,25 @@ body {
     border-radius: 0 0 4px 4px;
 }
 
+/* Bordure métallique du HAUT (Bezel Top) */
+.amplifier-panel::before {
+    content: "";
+    position: absolute;
+    top: -8px; /* Positionné au-dessus du panneau */
+    left: 0;
+    width: 100%;
+    height: 8px;
+    /* Dégradé inversé pour simuler l'angle vers le haut */
+    background: linear-gradient(to top, 
+        #444 0%, 
+        #222 20%, 
+        #111 80%, 
+        #000 100%);
+    /* Reflet sur l'arête supérieure */
+    border-bottom: 3px solid rgba(255, 255, 255, 0.15);
+    border-radius: 4px 4px 0 0;
+}
+
 .meter-container {
     display: flex;
     justify-content: space-between;
