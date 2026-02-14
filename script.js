@@ -55,6 +55,7 @@ const balR = document.getElementById('balance-R');
 const albumOverlay = document.getElementById('album-overlay');
 const albumPopup = document.getElementById('album-popup');
 const popupImg = document.getElementById('popup-img');
+const noCoverText = document.getElementById('no-cover-text');
 
 // --- SELECTEURS LIBRARY (AJOUTÉS) ---
 const libBtn = document.getElementById('library-btn');
@@ -226,10 +227,24 @@ function loadTrack(index) {
                 if (img) {
                     let s = ""; for (let i = 0; i < img.data.length; i++) s += String.fromCharCode(img.data[i]);
                     popupImg.src = `data:${img.format};base64,${window.btoa(s)}`;
-                } else { popupImg.src = ""; }
+                    popupImg.style.display = 'block';
+                    if (noCoverText) noCoverText.style.display = 'none';
+                } else { 
+                    popupImg.src = ""; 
+                    popupImg.style.display = 'none';
+                    if (noCoverText) noCoverText.style.display = 'flex';
+                }
                 updateMediaMetadata(); // <-- APPEL MEDIA SESSION ICI
             },
-            onError: () => { vfdLarge.textContent = file.name.toUpperCase(); vfdInfo.textContent = "ARTIST – ALBUM"; setTimeout(() => fitText(vfdLarge, 30), 10); updateMediaMetadata(); }
+            onError: () => { 
+                vfdLarge.textContent = file.name.toUpperCase(); 
+                vfdInfo.textContent = "ARTIST – ALBUM"; 
+                setTimeout(() => fitText(vfdLarge, 30), 10); 
+                popupImg.src = ""; 
+                popupImg.style.display = 'none';
+                if (noCoverText) noCoverText.style.display = 'flex';
+                updateMediaMetadata(); 
+            }
         });
     }
     engine.init();
@@ -238,7 +253,7 @@ function loadTrack(index) {
 
 // --- CLICS INTERACTIFS ---
 vfdLarge.addEventListener('click', (e) => {
-    if (!isPoweredOn || !popupImg.src.includes('data:')) return;
+    if (!isPoweredOn) return;
     e.stopPropagation(); albumOverlay.style.display = 'block'; albumPopup.style.display = 'block';
 });
 albumOverlay.addEventListener('click', () => { albumOverlay.style.display = 'none'; albumPopup.style.display = 'none'; });

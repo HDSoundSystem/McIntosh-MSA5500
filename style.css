@@ -665,6 +665,23 @@ body {
     display: block;
 }
 
+.no-cover-placeholder {
+    display: none;
+    max-width: 600px;
+    max-height: 600px;
+    min-width: 400px;
+    min-height: 400px;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+    justify-content: center;
+    align-items: center;
+    font-size: 48px;
+    font-weight: bold;
+    color: var(--mc-blue);
+    text-shadow: 0 0 20px rgba(0, 195, 255, 0.5);
+    letter-spacing: 8px;
+    border: 2px solid #333;
+}
+
 #album-overlay {
     display: none;
     position: fixed;
