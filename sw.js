@@ -12,9 +12,16 @@ const ASSETS_TO_CACHE = [
     '/assets/img/logo_b.png',
     '/assets/img/favicon.png',
     '/assets/img/vumeter-new.png',
+    '/assets/img/vumeter-new-off.png',
+    '/assets/img/logo_cover.png',
+    '/assets/img/logo.png',
     '/assets/fontawesome7/css/all.min.css',
     '/assets/fontawesome7/webfonts/fa-solid-900.woff2',
-    '/assets/fontawesome7/webfonts/fa-solid-900.ttf'
+    '/assets/fontawesome7/webfonts/fa-solid-900.ttf',
+    '/assets/info/info.png',
+    '/css/eq.css',
+    '/css/mobile.css',
+    '/css/root.css'
 ];
 
 // Installation du Service Worker
