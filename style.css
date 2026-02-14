@@ -1,68 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Bitcount+Single:wght@300&family=Roboto:wght@300;400&display=swap');
+@import url('css/root.css');
+@import url('css/mobile.css');
+@import url('css/eq.css');
 
-:root {
-    --release-number: "RELEASE 2.4.0";
-    --background-color-app: #3a3a3a;
-    --mc-blue: #00c3ff;
-    --mc-green: #00ff41;
-    --panel-black: #080808;
-    --mc-led-green: #00ff00;
-    --mc-led-red: #ff0000;
-    --mc-red-button: #912624;
-    --mc-gold: #786b46;
-    --chassis-shadow: rgba(46, 46, 46, 0.8);
-    --border-bottom: #2e2e2e;
-    --background-matrix-display: #020202;
-    --background-option-menu: #000000;
-    --police-size-counter: 35px;
-    --police-size-label-counter: 15px;
-}
-
-/* --- COMPATIBILITÉ IPAD & TABLETTES --- */
-@media screen and (max-width: 1100px) {
-    .chassis-wrapper {
-        /* On réduit la taille globale pour que ça rentre dans l'écran */
-        transform: scale(0.85);
-        transform-origin: center center;
-    }
-
-    body {
-        /* On empêche le scroll si possible, ou on l'autorise si l'écran est vraiment petit */
-        overflow-y: auto;
-        align-items: flex-start;
-        /* Évite que le haut soit coupé si on scale */
-        padding-top: 20px;
-    }
-}
-
-/* --- IPAD PORTRAIT (Plus étroit) --- */
-@media screen and (max-width: 800px) {
-    .chassis-wrapper {
-        transform: scale(0.7);
-    }
-
-    .side-trim {
-        display: none;
-        /* On cache les bords en alu pour gagner de la place sur petit iPad */
-    }
-}
-
-/* Empêche le zoom bleu par défaut sur iPad quand on touche un bouton */
-.btn-base, .knob-outer, #display-btn {
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
-    cursor: pointer;
-}
-
-@media screen and (max-width: 1024px) {
-    .matrix-display {
-        width: 90vw;
-        /* Utilise la largeur de l'écran */
-        max-width: 950px;
-        transform: translateY(-10px);
-        /* On réduit le décalage sur tablette */
-    }
-}
 
 body {
     background-color: var(--background-color-app);
@@ -199,8 +139,6 @@ body {
     box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
     overflow: hidden;
 }
-
-
 
 .needle {
     position: absolute;
@@ -1325,113 +1263,6 @@ body {
     font-weight: normal;
     font-size: 10px;
 }
-
-.mc-popup-eq {
-    display: none;
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 500px;
-    background: rgba(0, 0, 0, 0.95);
-    border: 8px solid var(--mc-gold, #b29671);
-    border-radius: 15px;
-    padding: 20px;
-    z-index: 1000;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
-    color: white;
-    font-family: sans-serif;
-}
-
-.eq-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #333;
-    padding-bottom: 10px;
-    color: var(--mc-gold, #b29671);
-    font-size: 14px;
-    letter-spacing: 1px;
-}
-
-.eq-sliders-container {
-    display: flex;
-    justify-content: space-between;
-    height: 200px;
-}
-
-.eq-band {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 35px;
-}
-
-.eq-band input[type="range"] {
-    appearance: none;
-    width: 150px;
-    height: 4px;
-    background: #222;
-    transform: rotate(-90deg);
-    margin-top: 70px;
-    margin-bottom: 70px;
-    cursor: pointer;
-}
-
-.eq-band input[type="range"]::-webkit-slider-thumb {
-    appearance: none;
-    width: 12px;
-    height: 25px;
-    background: var(--mc-blue);
-    border-radius: 2px;
-    box-shadow: 0 0 5px #00ff66;
-}
-
-.eq-band span {
-    color: var(--mc-gold);
-    font-size: 10px;
-    font-weight: bold;
-    margin-top: 10px;
-    text-transform: uppercase;
-    text-align: center;
-    font-family: 'Roboto', sans-serif;
-}
-
-.close-eq {
-    cursor: pointer;
-    font-size: 20px;
-}
-
-.eq-footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 30px;
-    padding-top: 15px;
-    border-top: 1px solid #222;
-}
-
-/* On s'assure que le bouton garde les styles globaux de ton application */
-.eq-footer .button-option {
-    margin: 0;
-}
-
-.eq-graph-container {
-    width: 100%;
-    height: 100px;
-    background: #050505;
-    border: 1px solid #222;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    position: relative;
-}
-
-#eq-curve {
-    width: 100%;
-    height: 100%;
-}
-
 
 /* On s'assure que l'input color passe par-dessus l'effet visuel ::after */
 .btn-base input[type="color"] {
