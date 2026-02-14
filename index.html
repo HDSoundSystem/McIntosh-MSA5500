@@ -20,8 +20,7 @@
     </head>
     <body>
         <input type="file" id="audio-upload"
-            accept=".flac,.mp3,.mp4,.wav,.m4a,.aac,.ogg"
-            style="display: none;" multiple>
+            accept=".flac,.mp3,.mp4,.wav,.m4a,.aac,.ogg" multiple>
 
         <div class="chassis-wrapper">
             <div class="side-trim side-left"></div>
@@ -37,17 +36,14 @@
                         <img src="assets/img/mc-logo.png" alt="McIntosh"
                             class="brand-logo-img" id="logo-main">
                         <img src="assets/img/mc-logo-off.png" alt="Alternatif"
-                            class="brand-logo-img" id="logo-alt"
-                            style="display: none;">
+                            class="brand-logo-img" id="logo-alt">
 
                         <div class="status-indicators-row">
                             <div class="indicator-group">
-                                <div
-                                    style="display: flex; align-items: center; gap: 8px;">
+                                <div class="indicator-group-power-guard">
                                     <div id="led-pg-l"
                                         class="led-small led-red"></div>
-                                    <span class="indicator-label"
-                                        style="margin: 0;">POWER GUARD</span>
+                                    <span class="indicator-label power-guard-label">POWER GUARD</span>
                                     <div id="led-pg-r"
                                         class="led-small led-red"></div>
                                 </div>
@@ -68,14 +64,10 @@
 
                 <div class="display-area">
                     <div class="matrix-display" id="vfd">
-                        <div class="vfd-tech-corner"
-                            style="display: flex; flex-direction: column; align-items: flex-start;">
-                            <div class="tech-label"
-                                style="margin-bottom: 2px;">TRACK</div>
-                            <div class="tech-data"
-                                style="display: flex; flex-direction: column; align-items: flex-start;">
-                                <span id="track-count"
-                                    style="line-height: 1;">0/0</span>
+                        <div class="vfd-tech-corner left-corner">
+                            <div class="tech-label track-label">TRACK</div>
+                            <div class="tech-data track-data">
+                                <span id="track-count">0/0</span>
                                 <div class="sub-tech-row">
                                     <span id="file-format">---</span>
                                     <span id="bitrate">---</span>
@@ -88,8 +80,7 @@
 
                         <div id="volume-display">VOL: 70%</div>
 
-                        <div class="vfd-tech-corner"
-                            style="left: auto; right: 20px; align-items: flex-end;">
+                        <div class="vfd-tech-corner right-corner">
                             <div class="tech-label">TIME</div>
                             <div class="tech-data">
                                 <span id="time-display">00:00</span>
@@ -315,11 +306,9 @@
                 </div>
 
                 <div id="playlist-popup" class="options-menu">
-                    <div class="label-green"
-                        style="text-align: center; margin-bottom: 15px;">Current
+                    <div class="label-green playlist-center-text">Current
                         Playlist</div>
-                    <div id="playlist-items"
-                        style="color: var(--mc-blue); font-family: 'Roboto', sans-serif; font-size: 14px;"></div>
+                    <div id="playlist-items"></div>
                 </div>
             </div>
 
@@ -345,7 +334,7 @@
                 <label for="folder-input" class="scan-label">SCAN
                     DIRECTORY</label>
                 <input type="file" id="folder-input" webkitdirectory directory
-                    multiple style="display:none;">
+                    multiple>
                 <div class="file-browser">
                     <ul id="file-list"></ul>
                 </div>

@@ -1502,3 +1502,63 @@ body {
     opacity: 0.8;
     text-shadow: 0 0 10px rgba(120, 107, 70, 0.5);
 }
+
+/* Styles pour les éléments avec attributs style inline */
+#audio-upload {
+    display: none;
+}
+
+#logo-alt {
+    display: none;
+}
+
+.vfd-tech-corner.left-corner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.tech-label.track-label {
+    margin-bottom: 2px;
+}
+
+.tech-data.track-data {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#track-count {
+    line-height: 1;
+}
+
+.vfd-tech-corner.right-corner {
+    left: auto;
+    right: 20px;
+    align-items: flex-end;
+}
+
+.indicator-group-power-guard {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.indicator-label.power-guard-label {
+    margin: 0;
+}
+
+.playlist-center-text {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+#playlist-items {
+    color: var(--mc-blue);
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+}
+
+#folder-input {
+    display: none;
+}
