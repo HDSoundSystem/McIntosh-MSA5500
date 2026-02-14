@@ -39,7 +39,7 @@
     font-weight: 300;
     position: absolute;
     left: 50%;
-    bottom: 10px;
+    bottom: 5px;
     transform: translateX(-50%);
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -169,7 +169,7 @@
 
 #vfd-status-icon {
     position: absolute;
-    bottom: 20px;
+    bottom: 5px;
     right: 20px;
     font-size: 30px;
     color: var(--mc-blue);
