@@ -98,7 +98,7 @@
 #track-count {
     color: var(--mc-blue);
     font-size: var(--police-size-counter);
-    font-weight: 700;
+    font-weight: 300;
     font-family: 'bitcount single', sans-serif;
     line-height: 1;
 }
@@ -130,7 +130,7 @@
 
 #time-display {
     font-size: var(--police-size-counter);
-    font-weight: 700;
+    font-weight: 300;
 }
 
 .vfd-small {
@@ -172,7 +172,6 @@
     position: absolute;
     bottom: 20px;
     right: 20px;
-    font-size: 32px;
+    font-size: 30px;
     color: var(--mc-blue);
-    opacity: 0.7;
 }
