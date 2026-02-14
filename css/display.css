@@ -35,8 +35,8 @@
 #volume-display {
     color: var(--mc-blue);
     font-family: 'bitcount single', sans-serif;
-    font-size: 20px;
-    font-weight: 700;
+    font-size: 30px;
+    font-weight: 300;
     position: absolute;
     left: 50%;
     bottom: 10px;
@@ -75,7 +75,6 @@
     font-size: var(--police-size-label-counter);
     font-weight: bold;
     letter-spacing: 1px;
-    opacity: 0.7;
 }
 
 .tech-label.track-label {
@@ -105,7 +104,7 @@
 
 #file-format, #bitrate {
     font-size: 18px;
-    opacity: 0.8;
+    font-weight: 300;
 }
 
 #file-format {
@@ -124,8 +123,8 @@
 
 .loudness-indicator {
     color: var(--mc-blue);
-    font-size: 16px;
-    opacity: 0.8;
+    font-size: 18px;
+    font-weight: 300;
 }
 
 #time-display {
