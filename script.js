@@ -741,3 +741,54 @@ eqResetBtn?.addEventListener('click', () => {
     drawEQCurve();
     showStatusBriefly("EQ FLAT (0dB)");
 });
+
+
+const eqPresets = {
+    'eq-pop-btn':     [-2, -1, 2, 4, 5, 5, 4, 2, -1, -2],
+    'eq-rock-btn':    [7, 5, 3, -1, -3, -3, 1, 4, 6, 8],
+    'eq-jazz-btn':    [4, 2, 0, 2, 4, 4, 2, 0, 2, 4],
+    'eq-classic-btn': [5, 4, 2, 0, 0, 0, 0, 2, 4, 5],
+    'eq-reset-btn':   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+};
+
+function applyPreset(btnId) {
+    const gains = eqPresets[btnId];
+    if (!gains) return;
+
+    const sliders = document.querySelectorAll('input[type="range"]');
+
+    // 1. On applique les gains aux sliders
+    sliders.forEach((slider, index) => {
+        if (gains[index] !== undefined) {
+            slider.value = gains[index];
+            
+            // On déclenche l'événement pour le SON 
+            // (mais cela va envoyer "16000" au VFD par erreur)
+            slider.dispatchEvent(new Event('input', { bubbles: true }));
+        }
+    });
+
+    // 2. LA CORRECTION : On force l'affichage du nom du preset APRÈS la boucle
+    // On extrait le nom (ex: "ROCK") de l'ID du bouton
+    let presetName = btnId.replace('eq-', '').replace('-btn', '').toUpperCase();
+    if (presetName === 'RESET') presetName = 'FLAT';
+
+    // On utilise ta fonction d'affichage VFD
+    if (typeof showStatusBriefly === 'function') {
+        showStatusBriefly("PRESET: " + presetName);
+    } else {
+        // Si tu n'as pas de fonction "briefly", on écrit directement dans ton élément VFD
+        const vfdDisplay = document.getElementById('vfd-display'); // remplace par ton ID
+        if (vfdDisplay) vfdDisplay.innerText = "PRESET: " + presetName;
+    }
+
+    if (typeof drawEQCurve === 'function') drawEQCurve();
+}
+
+// Initialisation des boutons
+Object.keys(eqPresets).forEach(id => {
+    const btn = document.getElementById(id);
+    if (btn) {
+        btn.onclick = () => applyPreset(id);
+    }
+});
