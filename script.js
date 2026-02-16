@@ -815,3 +815,130 @@ document.querySelectorAll('input[type="range"]').forEach(slider => {
         }
     });
 });
+
+// --- GESTION DE L'ÉGALISEUR 10 BANDES ---
+const eqBtn = document.getElementById('eq-btn');
+const eqPopup = document.getElementById('eq-popup');
+const closeEq = document.getElementById('close-eq');
+const eqResetBtn = document.getElementById('eq-reset-btn');
+const eqSliders = document.querySelectorAll('.eq-band input'); // Cible uniquement les sliders EQ
+const eqCanvas = document.getElementById('eq-curve');
+const eqCtx = eqCanvas?.getContext('2d');
+const displayElement = document.getElementById('eq-preset-name-display');
+
+// Définition des gains pour chaque bouton
+const eqPresets = {
+    'eq-pop-btn':     [-2, -1, 2, 4, 5, 5, 4, 2, -1, -2],
+    'eq-rock-btn':    [7, 5, 3, -1, -3, -3, 1, 4, 6, 8],
+    'eq-jazz-btn':    [4, 2, 0, 2, 4, 4, 2, 0, 2, 4],
+    'eq-classic-btn': [5, 4, 2, 0, 0, 0, 0, 2, 4, 5],
+    'eq-reset-btn':   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+};
+
+// Fonction pour dessiner la courbe lissée
+function drawEQCurve() {
+    if (!eqCanvas || !eqCtx) return;
+    const width = eqCanvas.width = eqCanvas.offsetWidth;
+    const height = eqCanvas.height = eqCanvas.offsetHeight;
+    eqCtx.clearRect(0, 0, width, height);
+
+    // Grille de fond
+    eqCtx.strokeStyle = "#1a1a1a";
+    eqCtx.lineWidth = 1;
+    eqCtx.beginPath();
+    for(let i = 1; i < 4; i++) {
+        let y = (height / 4) * i;
+        eqCtx.moveTo(0, y); eqCtx.lineTo(width, y);
+    }
+    eqCtx.stroke();
+
+    // Points de la courbe
+    const points = Array.from(eqSliders).map((slider, index) => {
+        const x = (width / (eqSliders.length - 1)) * index;
+        const y = (height / 2) - (slider.value * (height / 26)); 
+        return {x, y};
+    });
+
+    // Dessin de la courbe bleue "McIntosh"
+    eqCtx.beginPath();
+    eqCtx.strokeStyle = "#00c3ff";
+    eqCtx.lineWidth = 3;
+    eqCtx.lineCap = "round";
+    eqCtx.shadowBlur = 10;
+    eqCtx.shadowColor = "#00ff66";
+    eqCtx.moveTo(points[0].x, points[0].y);
+    for (let i = 0; i < points.length - 1; i++) {
+        const xc = (points[i].x + points[i + 1].x) / 2;
+        const yc = (points[i].y + points[i + 1].y) / 2;
+        eqCtx.quadraticCurveTo(points[i].x, points[i].y, xc, yc);
+    }
+    eqCtx.lineTo(points[points.length - 1].x, points[points.length - 1].y);
+    eqCtx.stroke();
+    eqCtx.shadowBlur = 0;
+}
+
+// FONCTION CLÉ : Appliquer un preset
+function applyPreset(btnId) {
+    if (!isPoweredOn) return;
+    const gains = eqPresets[btnId];
+    if (!gains) return;
+
+    eqSliders.forEach((slider, index) => {
+        if (gains[index] !== undefined) {
+            slider.value = gains[index];
+            // On envoie la valeur au moteur audio pour chaque bande
+            const freq = slider.getAttribute('data-freq');
+            if (engine && engine.setCustomFilter) {
+                engine.setCustomFilter(freq, gains[index]);
+            }
+        }
+    });
+
+    // Mise à jour du nom du preset affiché
+    let presetName = btnId.replace('eq-', '').replace('-btn', '').toUpperCase();
+    if (presetName === 'RESET') presetName = 'FLAT';
+    if (displayElement) displayElement.innerText = presetName;
+
+    showStatusBriefly("PRESET: " + presetName);
+    drawEQCurve();
+}
+
+// Événements pour les sliders (manuel)
+eqSliders.forEach(slider => {
+    slider.addEventListener('input', (e) => {
+        const freq = e.target.getAttribute('data-freq');
+        const gain = e.target.value;
+        if (engine.setCustomFilter) engine.setCustomFilter(freq, gain);
+        drawEQCurve();
+        if (displayElement) displayElement.innerText = "CUSTOM";
+        showStatusBriefly(`${freq}Hz: ${gain > 0 ? '+' : ''}${gain}dB`);
+    });
+});
+
+// Événements pour les boutons de presets
+Object.keys(eqPresets).forEach(id => {
+    const btn = document.getElementById(id);
+    if (btn) {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            applyPreset(id);
+        });
+    }
+});
+
+// Contrôles de la popup
+eqBtn?.addEventListener('click', (e) => {
+    if (isPoweredOn) {
+        e.stopPropagation();
+        eqPopup.style.display = 'block';
+        setTimeout(drawEQCurve, 50);
+    } else {
+        showStatusBriefly("POWER ON FIRST");
+    }
+});
+
+closeEq?.addEventListener('click', () => eqPopup.style.display = 'none');
+eqPopup?.addEventListener('click', (e) => e.stopPropagation());
+
+// Initialisation au démarrage
+if (displayElement) displayElement.innerText = "FLAT";
