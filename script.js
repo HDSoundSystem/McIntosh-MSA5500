@@ -705,10 +705,18 @@ function drawEQCurve() {
     eqCtx.shadowBlur = 0;
 }
 
+const EQ_PRESETS = {
+    'eq-pop-btn':     [3, 2, 1, 0, -1, -1, 0, 1, 2, 3],
+    'eq-rock-btn':    [5, 4, 2, 0, -1, 0, 1, 2, 4, 5],
+    'eq-jazz-btn':    [4, 3, 1, 1, -1, -1, 0, 1, 2, 2],
+    'eq-classic-btn': [4, 3, 2, 0, 0, 0, 0, 2, 3, 4],
+    'eq-reset-btn':   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+};
+
 // Appliquer un preset (unique, fusion des comportements)
 function applyPreset(btnId) {
     if (!isPoweredOn) return;
-    const gains = window.EQ_PRESETS[btnId];
+    const gains = EQ_PRESETS[btnId];
     if (!gains) return;
 
     eqSliders.forEach((slider, index) => {
