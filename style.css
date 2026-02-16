@@ -25,6 +25,8 @@
 /* Mobile responsive */
 @import url('css/mobile.css');
 
+@import url('css/info.css');
+
 body {
     background-color: var(--background-color-app);
     display: flex;

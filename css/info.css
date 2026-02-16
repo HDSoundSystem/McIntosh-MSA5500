@@ -1,0 +1,40 @@
+.github-link {
+    color: var(--mc-gold); /* Utilise ton doré McIntosh */
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    letter-spacing: 5px;
+    transition: all 0.3s ease;
+    opacity: 0.7;
+    margin-top: 5px;
+}
+
+.github-link:hover {
+    opacity: 1;
+    text-shadow: 0 0 8px var(--mc-gold);
+    color: #fff;
+}
+
+
+.mcintosh-footer-link:hover {
+    opacity: 1;
+}
+
+.mcintosh-footer-link:hover .mcintosh-mini-logo {
+    filter: brightness(1.1); /* L'image s'éclaire au survol */
+    outline: none; /* Supprime le cadre de sélection */
+    box-shadow: none;
+}
+
+.mcintosh-footer-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--mc-gold);
+    text-decoration: none !important;
+    font-family: 'Roboto', sans-serif;
+    font-size: 11px;
+    letter-spacing: 1px;
+    transition: opacity 0.3s ease;
+    outline: none !important;
+}

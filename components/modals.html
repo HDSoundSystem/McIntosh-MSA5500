@@ -52,6 +52,7 @@
     </div>
 
     <div class="eq-graph-container">
+        <div id="eq-preset-name-display">FLAT</div>
         <canvas id="eq-curve"></canvas>
     </div>
 
@@ -91,13 +92,66 @@
     <div class="eq-footer">
         <div class="button-option">
             <div class="label-zone-option"><span
+                    class="small-label">POP</span></div>
+            <div class="btn-base black-btn" id="eq-pop-btn"></div>
+        </div>
+        <div class="button-option">
+            <div class="label-zone-option"><span
+                    class="small-label">ROCK</span></div>
+            <div class="btn-base black-btn" id="eq-rock-btn"></div>
+        </div>
+        <div class="button-option">
+            <div class="label-zone-option"><span
+                    class="small-label">JAZZ</span></div>
+            <div class="btn-base black-btn" id="eq-jazz-btn"></div>
+        </div>
+        <div class="button-option">
+            <div class="label-zone-option"><span
+                    class="small-label">CLASSIC</span></div>
+            <div class="btn-base black-btn" id="eq-classic-btn"></div>
+        </div>
+        <div class="button-option">
+            <div class="label-zone-option"><span
                     class="small-label">FLAT</span></div>
             <div class="btn-base black-btn" id="eq-reset-btn"></div>
         </div>
     </div>
 </div>
 
+
+
+<div id="speed-popup" class="eq-popup-container" style="display: none;">
+    <div class="eq-header">
+        <span class="eq-title">PITCH & TEMPO</span>
+        <div class="close-btn-eq" id="close-speed">×</div>
+    </div>
+    
+    <div class="speed-content">
+        <div class="speed-slider-container">
+            <span class="speed-label">0.5x</span>
+            <input type="range" id="speed-slider" min="0.5" max="2.0" step="0.05" value="1.0">
+            <span class="speed-label">2.0x</span>
+        </div>
+        <div id="speed-value-display">SPEED: 1.00x</div>
+        <button id="speed-reset-btn" class="preset-btn">RESET (1.0x)</button>
+    </div>
+</div>
+
+
+
 <div id="info-overlay-fix" onclick="this.style.display='none'">
     <img src="assets/info/info2.png" alt="Information">
     <div class="release-version"></div>
+    <a href="https://github.com/HDSoundSystem/McIntosh-MSA5500" 
+   target="_blank" 
+   rel="noopener noreferrer" 
+   class="github-link">
+   GITHUB
+</a>
+<a href="https://www.mcintoshlabs.com/" 
+   target="_blank" 
+   rel="noopener noreferrer" 
+   class="github-link">
+   THANKS TO MCINTOSH
+</a>
 </div>
