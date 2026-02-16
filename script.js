@@ -743,13 +743,27 @@ eqResetBtn?.addEventListener('click', () => {
 });
 
 
-const eqPresets = {
-    'eq-pop-btn':     [-2, -1, 2, 4, 5, 5, 4, 2, -1, -2],
-    'eq-rock-btn':    [7, 5, 3, -1, -3, -3, 1, 4, 6, 8],
-    'eq-jazz-btn':    [4, 2, 0, 2, 4, 4, 2, 0, 2, 4],
-    'eq-classic-btn': [5, 4, 2, 0, 0, 0, 0, 2, 4, 5],
-    'eq-reset-btn':   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const presetLabels = {
+    'eq-pop-btn': 'POP',
+    'eq-rock-btn': 'ROCK',
+    'eq-jazz-btn': 'JAZZ',
+    'eq-classic-btn': 'CLASSIC',
+    'eq-reset-btn': 'FLAT'
 };
+
+const displayElement = document.getElementById('eq-preset-name-display');
+
+// 1. Mise à jour via les boutons
+Object.keys(presetLabels).forEach(id => {
+    const btn = document.getElementById(id);
+    if (btn) {
+        btn.addEventListener('click', () => {
+            if (displayElement) {
+                displayElement.innerText = presetLabels[id];
+            }
+        });
+    }
+});
 
 function applyPreset(btnId) {
     const gains = eqPresets[btnId];
@@ -791,4 +805,13 @@ Object.keys(eqPresets).forEach(id => {
     if (btn) {
         btn.onclick = () => applyPreset(id);
     }
+});
+
+// 2. Mise à jour si on touche aux sliders manuellement
+document.querySelectorAll('input[type="range"]').forEach(slider => {
+    slider.addEventListener('input', () => {
+        if (displayElement) {
+            displayElement.innerText = "CUSTOM";
+        }
+    });
 });
