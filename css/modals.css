@@ -358,6 +358,42 @@
     font-size: 24px;
 }
 
+#speed-popup {
+    width: 300px;
+    padding: 20px;
+    background: #0a0a0a;
+    border: 2px solid #222;
+    box-shadow: 0 0 20px rgba(0, 195, 255, 0.2);
+    text-align: center;
+}
+
+.speed-slider-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+#speed-slider {
+    flex-grow: 1;
+    cursor: pointer;
+    accent-color: var(--mc-blue); /* Pour que le slider soit bleu McIntosh */
+}
+
+#speed-value-display {
+    color: var(--mc-gold);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 14px;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+#speed-reset-btn {
+    width: 100%;
+    padding: 8px;
+    font-size: 11px;
+}
+
 /* INFO OVERLAY */
 #info-overlay-fix {
     display: none;
