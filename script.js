@@ -743,12 +743,12 @@ eqResetBtn?.addEventListener('click', () => {
 });
 
 
-const presetLabels = {
-    'eq-pop-btn': 'POP',
-    'eq-rock-btn': 'ROCK',
-    'eq-jazz-btn': 'JAZZ',
-    'eq-classic-btn': 'CLASSIC',
-    'eq-reset-btn': 'FLAT'
+const eqPresets = {
+    'eq-pop-btn':     [-2, -1, 2, 4, 5, 5, 4, 2, -1, -2],
+    'eq-rock-btn':    [7, 5, 3, -1, -3, -3, 1, 4, 6, 8],
+    'eq-jazz-btn':    [4, 2, 0, 2, 4, 4, 2, 0, 2, 4],
+    'eq-classic-btn': [5, 4, 2, 0, 0, 0, 0, 2, 4, 5],
+    'eq-reset-btn':   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 };
 
 const displayElement = document.getElementById('eq-preset-name-display');
