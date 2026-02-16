@@ -106,14 +106,19 @@
 
 #eq-preset-name-display {
     position: absolute;
+    /* Utilisation de rgba : rouge=0, vert=0, bleu=0 (noir) et alpha=0.6 (60% d'opacité) */
+    background-color: rgba(0, 0, 0, 0.6); 
     bottom: 10px;
     left: 50%;
     transform: translateX(-50%);
-    color: #bfa36a; /* Or McIntosh */
+    color: var(--mc-gold);
     font-size: 12px;
     font-weight: bold;
     letter-spacing: 2px;
     text-transform: uppercase;
-    pointer-events: none; /* Pour ne pas gêner les clics sur le canvas */
-    opacity: 0.8;
+    pointer-events: none;
+    z-index: 10;
+    /* Optionnel : ajout d'un peu de padding et arrondi pour un look plus "pro" */
+    padding: 2px 10px;
+    border-radius: 4px;
 }

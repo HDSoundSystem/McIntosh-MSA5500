@@ -664,19 +664,10 @@ const presetLabels = {
 };
 
 const eqPresets = {
-    // POP : Accentue légèrement les voix et les extrêmes sans étouffer les médiums
-    'eq-pop-btn':     [3, 2, 1, 0, -1, -1, 0, 1, 2, 3],
-    
-    // ROCK : La célèbre courbe en "V" mais plus douce pour garder le corps des guitares
+    'eq-pop-btn':     [3, 2, 1, 0, 1, 2, 2, 1, 1, 2],
     'eq-rock-btn':    [5, 4, 2, 0, -1, 0, 1, 2, 4, 5],
-    
-    // JAZZ : Apporte de la chaleur aux instruments acoustiques et réduit les cymbales trop perçantes
-    'eq-jazz-btn':    [4, 3, 1, 1, -1, -1, 0, 1, 2, 2],
-    
-    // CLASSIC : Optimisé pour la dynamique des orchestres (basses profondes et clarté des violons)
+    'eq-jazz-btn':    [2, 1, 0, 1, 2, 2, 1, 0, 0, -1],
     'eq-classic-btn': [4, 3, 2, 0, 0, 0, 0, 2, 3, 4],
-    
-    // FLAT : Le son original de l'enregistrement, sans aucune modification
     'eq-reset-btn':   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 };
 
