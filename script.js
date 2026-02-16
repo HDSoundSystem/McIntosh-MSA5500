@@ -654,7 +654,7 @@ const eqCanvas = document.getElementById('eq-curve');
 const eqCtx = eqCanvas?.getContext('2d');
 const displayElement = document.getElementById('eq-preset-name-display');
 
-// Labels de presets (manquait auparavant)
+
 const presetLabels = {
     'eq-pop-btn': 'POP',
     'eq-rock-btn': 'ROCK',
@@ -671,7 +671,7 @@ const eqPresets = {
     'eq-reset-btn':   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 };
 
-// Dessin de la courbe lissée (unique)
+
 function drawEQCurve() {
     if (!eqCanvas || !eqCtx) return;
     const width = eqCanvas.width = eqCanvas.offsetWidth;
