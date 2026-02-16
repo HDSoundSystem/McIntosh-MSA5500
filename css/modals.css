@@ -392,7 +392,6 @@
     letter-spacing: 3px;
     font-weight: 300;
     text-transform: uppercase;
-    opacity: 0.8;
     text-shadow: 0 0 10px rgba(120, 107, 70, 0.5);
 }
 
@@ -405,6 +404,5 @@
     font-size: 14px;
     letter-spacing: 3px;
     text-transform: uppercase;
-    opacity: 0.8;
     text-shadow: 0 0 10px rgba(120, 107, 70, 0.5);
 }
