@@ -705,24 +705,36 @@ function drawEQCurve() {
     eqCtx.shadowBlur = 0;
 }
 
-const EQ_PRESETS = {
+const eqPresets = {
+    // POP : Accentue légèrement les voix et les extrêmes pour plus de clarté
     'eq-pop-btn':     [3, 2, 1, 0, -1, -1, 0, 1, 2, 3],
+    
+    // ROCK : Courbe en "V" classique mais maîtrisée pour garder le corps des guitares
     'eq-rock-btn':    [5, 4, 2, 0, -1, 0, 1, 2, 4, 5],
+    
+    // JAZZ : Apporte de la chaleur aux instruments et adoucit les hautes fréquences
     'eq-jazz-btn':    [4, 3, 1, 1, -1, -1, 0, 1, 2, 2],
+    
+    // CLASSIC : Optimisé pour la dynamique (basses profondes et précision des cordes)
     'eq-classic-btn': [4, 3, 2, 0, 0, 0, 0, 2, 3, 4],
+    
+    // FLAT : Le son pur tel qu'enregistré, sans aucune modification
     'eq-reset-btn':   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 };
 
-// Appliquer un preset (unique, fusion des comportements)
+// --- FONCTION POUR APPLIQUER LES PRESETS ---
 function applyPreset(btnId) {
     if (!isPoweredOn) return;
-    const gains = EQ_PRESETS[btnId];
+    const gains = eqPresets[btnId]; // On récupère les valeurs définies ci-dessus
     if (!gains) return;
 
+    // Mise à jour de chaque bande de l'égaliseur
     eqSliders.forEach((slider, index) => {
         if (gains[index] !== undefined) {
             slider.value = gains[index];
             const freq = slider.getAttribute('data-freq');
+            
+            // Envoi immédiat au moteur audio
             if (engine && engine.setCustomFilter) {
                 engine.setCustomFilter(freq, gains[index]);
             }
