@@ -1,15 +1,14 @@
-# McIntosh MSA5500
-## Inspired by the high-end McIntosh MSA5500 2-Channel Streaming Integrated Amplifier
+# McIntosh Digital audio Player
+## Inspired by the high-end McIntosh MSA5500 2-Channel Streaming Integrated Amplifier and DS200 STREAMING DAC
 
 A premium web-based audio player inspired by the legendary McIntosh amplifier design, featuring authentic VU meters, professional 10-band equalizer, stereo balance, A-B loop functionality, mono mode, loudness compensation, power guard protection, customizable visual themes, and a stunning interface that captures the essence of high-end audio equipment.
 
-![McIntosh MSA5500](https://img.shields.io/badge/McIntosh-MSA5500-blue)
 ![Status](https://img.shields.io/badge/status-active-success)
 ![License](https://img.shields.io/badge/license-MIT-green)
-![Version](https://img.shields.io/badge/version-2.4.0-blue)
+![Version](https://img.shields.io/badge/version-2.5.1-blue)
 
 ![543375630-9f65f1d2-5f77-458b-b0fc-5ec35e992042](https://github.com/user-attachments/assets/7bc36eb4-3abf-4167-862a-a5e87df7afc9)
-<img width="1805" height="802" alt="1" src="https://github.com/user-attachments/assets/24c1c6bd-37bd-4065-8a0f-c8c1a053f7f9" />
+<img width="1792" height="792" alt="2" src="https://github.com/user-attachments/assets/d551dceb-63b5-4e1b-91a4-8639ee60aa43" />
 
 ---
 
@@ -37,7 +36,7 @@ A premium web-based audio player inspired by the legendary McIntosh amplifier de
 
 ## 🎯 Overview
 
-The **McIntosh MSA5500** is a premium web-based audio application that recreates the experience of using an authentic McIntosh amplifier. It combines modern web technologies with iconic vintage design to deliver an immersive and visually stunning listening experience.
+The **McIntosh DAP** is a premium web-based audio application that recreates the experience of using an authentic McIntosh amplifier. It combines modern web technologies with iconic vintage design to deliver an immersive and visually stunning listening experience.
 
 ### Key Highlights
 - **Authentic Interface**: Faithful design to McIntosh amplifiers with animated VU meters and VFD display
@@ -269,7 +268,7 @@ Professional audio graph with:
 ### Project Structure
 
 ```
-McIntosh-MSA5500-main/
+McIntosh-DAP-main/
 ├── index.html                 # Main entry point
 ├── main.js                    # Electron entry point
 ├── script.js                  # Main application logic
@@ -503,7 +502,7 @@ app.whenReady().then(createWindow);
 
 **Cache Strategy**:
 ```javascript
-const CACHE_NAME = 'mcintosh-msa5500-v2.4.0';
+const CACHE_NAME = 'mcintosh-dap-v2.5.1';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -658,8 +657,8 @@ function loadTrack(index) {
 #### Installation
 1. **Clone the repository**:
 ```bash
-git clone https://github.com/yourusername/mcintosh-msa5500.git
-cd mcintosh-msa5500
+git clone https://github.com/yourusername/mcintosh-dap.git
+cd mcintosh-dap
 ```
 
 2. **Serve the application**:
@@ -698,7 +697,7 @@ npm run dist
 #### Executable File
 After build, the portable app is in:
 ```
-dist/McIntosh-MSA5500.exe
+dist/McIntosh-dap.exe
 ```
 
 ### Usage
@@ -774,7 +773,7 @@ File `package.json`:
 {
   "build": {
     "appId": "com.yohann.mcintosh",
-    "productName": "McIntosh-MSA5500",
+    "productName": "McIntosh-DAP",
     "win": {
       "icon": "assets/img/favicon.ico",
       "target": "portable"
@@ -790,7 +789,7 @@ File `package.json`:
 
 File `sw.js` - Modify to customize cache:
 ```javascript
-const CACHE_NAME = 'mcintosh-msa5500-v2.4.0';
+const CACHE_NAME = 'mcintosh-dap-v2.5.1';
 const urlsToCache = [
   // Add or remove URLs to cache
 ];
@@ -945,8 +944,8 @@ This project pays homage to **McIntosh Laboratory**, legendary American manufact
 
 ### Getting Help
 
-- **Issues**: [GitHub Issues](https://github.com/yourusername/mcintosh-msa5500/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/yourusername/mcintosh-msa5500/discussions)
+- **Issues**: [GitHub Issues](https://github.com/yourusername/mcintosh-dap/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/yourusername/mcintosh-dap/discussions)
 - **Documentation**: This README and inline code comments
 
 ### Useful Resources
@@ -995,21 +994,16 @@ A: Use TONE RESET in the options menu to reset BASS/TREBLE and balance. Use FLAT
 **Q: Can I customize the visual appearance?**
 A: Yes! Use the BACK COLOR and SHADOW COLOR pickers in the options menu. The DISPLAY button also cycles through different visual states.
 
-**Q: Does this work on iPad?**
-A: Yes! The interface is optimized for tablets with responsive scaling and touch-friendly controls.
 
 ---
-
-<img width="1821" height="816" alt="2" src="https://github.com/user-attachments/assets/ff14d187-c485-4b16-b144-2dbfda1af5e2" />
-<img width="1805" height="825" alt="3" src="https://github.com/user-attachments/assets/8184a898-e182-45cc-bd76-591561e1cbea" />
-<img width="1805" height="815" alt="4" src="https://github.com/user-attachments/assets/28580fec-e485-47f1-a376-0328581088ab" />
-<img width="1808" height="813" alt="5" src="https://github.com/user-attachments/assets/6837c92a-befc-4e5c-8910-93cc285a0cde" />
-<img width="1804" height="898" alt="6" src="https://github.com/user-attachments/assets/a474c1d9-e970-42c5-9a30-7b9ccad3bb03" />
-<img width="1809" height="897" alt="7" src="https://github.com/user-attachments/assets/49012948-2246-436f-975b-fd4f38d32890" />
-<img width="1795" height="815" alt="8" src="https://github.com/user-attachments/assets/bc0a74fc-df2f-4b98-a62f-d2a32e9deecb" />
-<img width="1819" height="882" alt="9" src="https://github.com/user-attachments/assets/89cbd8e7-326e-4c31-804b-990d3a02378c" />
-<img width="1797" height="807" alt="10" src="https://github.com/user-attachments/assets/1862cd22-f6c8-457f-8ac8-7ecf8422b09d" />
-
+<img width="1792" height="792" alt="2" src="https://github.com/user-attachments/assets/cdc73759-1ab8-43a5-a2c6-819994940f8d" />
+<img width="1788" height="788" alt="3" src="https://github.com/user-attachments/assets/019ee542-5c03-4f16-832c-a756e1cedbc3" />
+<img width="1788" height="872" alt="4" src="https://github.com/user-attachments/assets/9091346a-d9d5-468a-846a-5737f91417a3" />
+<img width="1789" height="798" alt="5" src="https://github.com/user-attachments/assets/1ee79fcf-6367-431e-a237-e6f2ebfe120b" />
+<img width="1788" height="791" alt="6" src="https://github.com/user-attachments/assets/733c2d92-a92b-4f34-9b46-0f8e2743bb48" />
+<img width="1796" height="865" alt="7" src="https://github.com/user-attachments/assets/cf5ca0bf-ca0b-4117-9397-fcb53f2880e5" />
+<img width="1781" height="792" alt="8" src="https://github.com/user-attachments/assets/a129b238-2181-453b-95b8-f87453ff9dad" />
+<img width="1784" height="791" alt="9" src="https://github.com/user-attachments/assets/41cd333e-cce3-4f56-b6e0-133fa93e9f1d" />
 ---
 
 **Enjoy your premium web audio experience! 🎵🎛️**

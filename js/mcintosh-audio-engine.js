@@ -1,5 +1,5 @@
 /**
- * McIntosh MSA5500 Audio Engine - 10-Band EQ Update
+ * McIntosh Digital Audio Player Engine - 10-Band EQ Update
  * Controls playback, 10-band graphic EQ, loudness, and VU meters..
  */
 

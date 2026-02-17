@@ -1,7 +1,7 @@
-// McIntosh MSA5500 - Service Worker
+// McIntosh DAP - Service Worker
 // Version 1.0.0
 
-const CACHE_NAME = 'McIntosh-MSA5500';
+const CACHE_NAME = 'McIntosh-DAP';
 const ASSETS_TO_CACHE = [
     '/',
     '/index.html',

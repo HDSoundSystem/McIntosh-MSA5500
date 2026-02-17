@@ -1,7 +1,7 @@
 {
-  "name": "McIntosh-MSA-5500",
-  "version": "2.5.0",
-  "description": "McIntosh-MSA-5500-Audio-Player",
+  "name": "McIntosh-DAP",
+  "version": "2.5.1",
+  "description": "McIntosh-Digital-Audio-Player",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
@@ -15,8 +15,8 @@
     "electron-builder": "^24.6.4"
   },
   "build": {
-    "appId": "com.yohann.mcintosh",
-    "productName": "McIntosh-MSA5500",
+    "appId": "com.yohann.mcintoshDAP",
+    "productName": "McIntosh-DAP",
     "win": {
       "icon": "assets/img/favicon.ico",
       "target": "portable"
