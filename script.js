@@ -718,18 +718,40 @@ function drawEQCurve() {
 // Appliquer un preset (unique, fusion des comportements)
 function applyPreset(btnId) {
     if (!isPoweredOn) return;
+    
     const gains = eqPresets[btnId];
     if (!gains) return;
 
+    // 1. Appliquer les gains aux sliders et au moteur audio
     eqSliders.forEach((slider, index) => {
-        if (gains[index] !== undefined) {
-            slider.value = gains[index];
-            const freq = slider.getAttribute('data-freq');
-            if (engine && engine.setCustomFilter) {
-                engine.setCustomFilter(freq, gains[index]);
-            }
-        }
+        slider.value = gains[index];
+        const freq = slider.getAttribute('data-freq');
+        if (engine?.setCustomFilter) engine.setCustomFilter(freq, gains[index]);
     });
+
+    // 2. Préparer le nom du preset pour l'affichage
+    // On transforme "eq-rock-btn" en "ROCK"
+    let presetName = btnId.replace('eq-', '').replace('-btn', '').toUpperCase();
+    
+    // 3. Logique d'affichage sur le VFD (à côté du bitrate)
+    const vfdPresetElement = document.getElementById('vfd-preset-display');
+    if (vfdPresetElement) {
+        if (presetName === 'RESET' || presetName === 'FLAT') {
+            vfdPresetElement.innerText = ""; // On cache si c'est FLAT
+        } else {
+            vfdPresetElement.innerText = " | " + presetName; // On affiche avec un séparateur
+        }
+    }
+
+    // 4. Mise à jour de ton grand affichage central (optionnel)
+    if (displayElement) {
+        displayElement.innerText = (presetName === 'RESET') ? 'FLAT' : presetName;
+    }
+
+    // Feedback visuel
+    showStatusBriefly("PRESET: " + (presetName === 'RESET' ? 'FLAT' : presetName));
+    if (typeof drawEQCurve === 'function') drawEQCurve();
+}
 
     // Mise à jour du nom affiché
     let presetName = btnId.replace('eq-', '').replace('-btn', '').toUpperCase();
