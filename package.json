@@ -15,8 +15,8 @@
     "electron-builder": "^24.6.4"
   },
   "build": {
-    "appId": "com.yohann.mcintosh",
-    "productName": "McIntosh-MSA5500",
+    "appId": "com.yohann.mcintoshDAP",
+    "productName": "McIntosh-DAP",
     "win": {
       "icon": "assets/img/favicon.ico",
       "target": "portable"
