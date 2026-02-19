@@ -1,6 +1,7 @@
 :root {
     --release-number: "RELEASE 2.5.1";
-    --background-color-app: #3a3a3a;
+    --background-color-app: #8c816e;
+    --chassis-shadow: #ffffff;
     --mc-blue: #00c3ff;
     --mc-green: #00ff41;
     --panel-black: #080808;
@@ -8,7 +9,6 @@
     --mc-led-red: #ff0000;
     --mc-red-button: #912624;
     --mc-gold: #786b46;
-    --chassis-shadow: rgba(46, 46, 46, 0.8);
     --border-bottom: #2e2e2e;
     --background-matrix-display: #020202;
     --background-option-menu: #000000;
