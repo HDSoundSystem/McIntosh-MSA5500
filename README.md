@@ -3,11 +3,11 @@
 # McIntosh Digital Audio Player
 ## Inspired by the high-end McIntosh MSA5500 2-Channel Streaming Integrated Amplifier and DS200 STREAMING DAC
 
-A premium web-based audio player inspired by the legendary McIntosh amplifier design, featuring authentic VU meters, professional 10-band equalizer, stereo balance, A-B loop functionality, mono mode, loudness compensation, power guard protection, customizable visual themes, and a stunning interface that captures the essence of high-end audio equipment.
+A premium web-based audio player inspired by the legendary McIntosh amplifier design, featuring authentic VU meters, professional 10-band equalizer with dedicated rotary knob, stereo balance with precision control and mandatory center snap, A-B loop functionality, mono mode, loudness compensation, power guard protection, customizable visual themes, and a stunning interface that captures the essence of high-end audio equipment.
 
 ![Status](https://img.shields.io/badge/status-active-success)
 ![License](https://img.shields.io/badge/license-MIT-green)
-![Version](https://img.shields.io/badge/version-2.5.1-blue)
+![Version](https://img.shields.io/badge/version-2.6.0-blue)
 
 
 ![543375630-9f65f1d2-5f77-458b-b0fc-5ec35e992042](https://github.com/user-attachments/assets/7bc36eb4-3abf-4167-862a-a5e87df7afc9)
@@ -43,7 +43,7 @@ The **McIntosh DAP** is a premium web-based audio application that recreates the
 
 ### Key Highlights
 - **Authentic Interface**: Faithful design to McIntosh amplifiers with animated VU meters and VFD display
-- **Professional Audio Processing**: 10-band equalizer, tone controls, stereo balance
+- **Professional Audio Processing**: 10-band equalizer with rotary knob, tone controls, precision stereo balance
 - **Multi-platform**: Web app (PWA) and desktop application (Electron)
 - **Multiple Audio Formats**: FLAC, MP3, WAV, MP4/M4A, AAC, ALAC, OGG support
 - **Real-time Visualization**: VU meters with realistic physics and spectrum analyzer
@@ -117,6 +117,7 @@ The **McIntosh DAP** is a premium web-based audio application that recreates the
   - Mode indicators (RANDOM, REPEAT, REPEAT(1), REPEAT(ALL), A-B LOOP) in bottom left
   - Loudness indicator when active
   - Volume display overlay (auto-hides after 2 seconds)
+  - EQ preset indicator: `| EQ ROCK`, `| EQ JAZZ`, `| EQ CUSTOM`, etc. — displayed when any non-flat EQ is active
 
 #### Display Modes
 - **Normal Mode**: Full illumination
@@ -151,6 +152,7 @@ The **McIntosh DAP** is a premium web-based audio application that recreates the
 - **Temporary Display**: Overlay auto-hides after 2 seconds
 - **Hover Info**: Shows current volume level
 - **Loudness Integration**: Automatic compensation
+- **Layout**: ADJUST label displayed directly below the knob
 
 #### Mute Function
 - **Instant Muting**: Audio mute with status display
@@ -167,6 +169,13 @@ The **McIntosh DAP** is a premium web-based audio application that recreates the
 - **Visual Labels**: Frequency and gain indicators
 - **FLAT Button**: Restore all bands to 0dB
 - **Independence**: Separate from bass/treble tone controls
+- **EQUALIZER Rotary Knob**: Dedicated chrome rotary knob below INPUT button
+  - Same interaction model as VOLUME knob
+  - Click left half to cycle to previous preset, right half for next preset
+  - Mouse wheel support
+  - Visual rotation animation (60° per preset step)
+  - Presets in order: FLAT → POP → ROCK → JAZZ → CLASSIC → LIVE
+- **EQ CUSTOM Mode**: When sliders are adjusted manually, VFD displays `| EQ CUSTOM` status — identical behavior to named presets
 
 #### 2-Band Tone Controls (Classic McIntosh Style)
 - **Bass**: ±12dB at 200Hz (low shelf filter)
@@ -181,7 +190,13 @@ The **McIntosh DAP** is a premium web-based audio application that recreates the
 #### Stereo Balance
 - **Left/Right Adjustment**: -1 to +1
 - **Web Audio StereoPanner**: Precise control
-- **Step-based Adjustment**: 0.1 increments
+- **BALANCE Rotary Knob**: Dedicated chrome rotary knob below VOLUME button
+  - Same interaction model as VOLUME knob
+  - Click left half to move balance left, right half to move right
+  - Mouse wheel support for fine control
+  - Visual rotation animation (4° per step)
+- **Precision Step**: 2% increments (0.02) for fine-grained control
+- **Mandatory Center Snap**: When crossing 0, balance locks exactly to center before continuing — knob resets to 0° rotation
 - **Smart Disable**: Disabled when Mono mode is active
 
 #### Mono Mode
@@ -718,7 +733,9 @@ dist/McIntosh-dap.exe
 - **PLAY/PAUSE**: Play/Pause
 - **PREV/NEXT**: Previous/next track (hold for fast seek)
 - **STOP**: Stop playback
-- **VOLUME**: Click left/right or use mouse wheel
+- **VOLUME**: Click left/right or use mouse wheel — PUSH label above, ADJUST label below
+- **EQUALIZER**: Rotary knob below INPUT — click left/right or mouse wheel to cycle EQ presets
+- **BALANCE**: Rotary knob below VOLUME — click left/right or mouse wheel to adjust in 2% steps
 - **MUTE**: Mute audio
 - **OPTIONS**: Open options menu (EQ, balance, etc.)
 - **DISPLAY**: Change display mode
@@ -736,6 +753,10 @@ dist/McIntosh-dap.exe
 - **A-B LOOP**: Cycle OFF → A set → A-B active
 - **BACK COLOR**: Customize background color
 - **SHADOW COLOR**: Customize shadow color
+
+#### Direct Rotary Controls (no menu required)
+- **EQUALIZER knob** (below INPUT): Cycle through EQ presets directly — FLAT, POP, ROCK, JAZZ, CLASSIC, LIVE
+- **BALANCE knob** (below VOLUME): Adjust stereo balance in 2% steps with mandatory center snap
 
 ---
 
@@ -992,10 +1013,13 @@ A: Taskbar thumbnail buttons are Windows-only. However, global media key shortcu
 A: BASS/TREBLE are classic tone controls (shelf filters) for quick adjustments. The 10-band EQ provides precise frequency control across the entire audio spectrum. They work together.
 
 **Q: How do I reset all EQ settings?**
-A: Use TONE RESET in the options menu to reset BASS/TREBLE and balance. Use FLAT in the EQ popup to reset all 10 bands to 0dB.
+A: Use TONE RESET in the options menu to reset BASS/TREBLE and balance. Use FLAT in the EQ popup to reset all 10 bands to 0dB. The EQUALIZER knob will also select the FLAT preset when cycled to position 0.
 
 **Q: Can I customize the visual appearance?**
 A: Yes! Use the BACK COLOR and SHADOW COLOR pickers in the options menu. The DISPLAY button also cycles through different visual states.
+
+**Q: How do I set the balance exactly to center?**
+A: The BALANCE knob features a mandatory center snap — when turning from left to right (or right to left), it automatically locks to 0 (center) before continuing. This ensures you never miss the center position.
 
 
 ---
