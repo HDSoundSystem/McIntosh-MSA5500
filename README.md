@@ -11,7 +11,7 @@ A premium web-based audio player inspired by the legendary McIntosh amplifier de
 
 
 ![543375630-9f65f1d2-5f77-458b-b0fc-5ec35e992042](https://github.com/user-attachments/assets/7bc36eb4-3abf-4167-862a-a5e87df7afc9)
-<img width="1792" height="808" alt="1" src="https://github.com/user-attachments/assets/9898310a-5166-4970-8872-cb47436dbb11" />
+<img width="1803" height="833" alt="1" src="https://github.com/user-attachments/assets/56657905-2c0c-4000-bf1b-cb6dc99d8487" />
 
 ---
 
